@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="shortcut icon" href="./images/icon.jpg" type="image/x-icon">
+     <!-- Box icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <title>TSM-My Cart</title>
+  </head>
+  <body>
+    <!--Header-->
+    <header id="cart" class="cart-header">
+      <nav class="navigation">
+        <div class="navigation container">
+          <div class="logo">
+            <img src="./images/icon1.png" alt="" class="TSM">
+            The Shoes Maker
+          </div>
+          <div class="menu">
+            <div class="top-navigation">
+              <div class="logo">
+                The Shoes Maker
+              </div>
+              <div class="close">
+                <i class="bx bx-x"></i>
+              </div>
+            </div>
+            <ul class="navigation-list">
+              <li>
+                <div class="searchbar">
+                  <input class="search_input" type="text" name="alt" placeholder="Search...">
+                  <a href="#" class="search_bar"><i class="fas fa-search "></i></a>
+                </div>
+              </li>
+              <li class="navigation-item">
+                <a href="index.html" class="Navigation-link" >Home</a>
+              </li>
+              <li class="navigation-item">
+                <a href="product.html" class="Navigation-link" >Products</a>
+              </li>
+              <li class="navigation-item">
+                <a href="#about" class="Navigation-link" >About Us</a>
+              </li>
+              <li class="navigation-item">
+                <a href="#contact" class="Navigation-link" >Contact</a>
+              </li>
+              <li class="navigation-item">
+                <a href="account.html" class="Navigation-link" >Hello #User_Name</a>
+              </li>
+              <li class="navigation-item">
+                <a href="Cart.html" class="Navigation-link" ><i class="bx bx-shopping-bag"></i>
+                  <span class='badge badge-warning' id='lblCartCount'> 0 </span> </a>
+              </li>
+            </ul>
+          </div>
+          <a href="cart.html" class="cart-icon">
+            <i class="bx bx-shopping-bag"></i>
+            
+          </a>
+  
+          <div class="hamburger">
+            <i class="bx bx-menu"></i>
+          </div>
+        </div>
+      </nav>
+
+      
+      
+    </header>
+
+    <div class="Cart-Container">
+      <div class="Header3">
+        <h3 class="Heading">Shopping Cart</h3>
+        <h5 class="remove">Remove all</h5>
+        </div>
+        <div class="Cartitems">
+          <div class="imgb">
+          <img src="./images/tp4.png"/>
+          </div>
+          <div class="itom">
+          <h1 class="Name">Olivers' Special</h1>
+          <h3 class="Description">Formal </h3>
+          
+          </div>
+          <div class="Amount">
+            <input type="number" value="1" min="1">
+          </div>
+
+          <div class="prices">
+            <div class="price">$50</div>
+            <a href="#">
+            <div class="Wisl">Add To WishList</div></a>
+            <div class="remove">Remove</div>
+          </div>
+          
+        </div>
+        <div class="Cartitems">
+          <div class="imgb">
+          <img src="./images/tp4.png"/>
+          </div>
+          <div class="itom">
+          <h1 class="Name">Olivers' Special</h1>
+          <h3 class="Description">Formal </h3>
+          
+          </div>
+          <div class="Amount">
+            <input type="number" value="1" min="1">
+          </div>
+
+          <div class="prices">
+            <div class="price">$50</div>
+            <a href="#">
+            <div class="Wisl">Add To WishList</div></a>
+            <div class="remove">Remove</div>
+          </div>
+          
+        </div>
+        
+        <div class="tp">
+          <table>
+            <tr>
+              <td>Subtotal</td>
+              <td>$200</td>
+            </tr>
+            <tr>
+              <td>Items</td>
+              <td>3</td>
+            </tr>
+          </table>
+          <a href="checkout.html" class="check-button">Proceed To Checkout</a>
+    
+        </div>
+    </div>
+    
+    <section id="contact" class="footer">
+      <div class="foot-container">
+        <div class="footer-items">
+          <h3>
+            EXTRAS
+          </h3>
+          <a href="account.html" >Brands</a>
+  
+          <a href="index.html">Site Map</a>
+        </div>
+        <div class="footer-items">
+          <h3>Info Center</h3>
+          <a href="#">About Us</a>
+          <a href="#" >Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        
+        </div>
+        <div class="footer-items">
+          <h3>
+            ACCOUNTS
+          </h3>
+          <a href="account.html">My Accounts</a>
+          <a href="account.html">Order History</a>
+          <a href="wishlist.html">Wish List</a>
+        </div>
+        <div class="footer-items">
+          <h3>CONTACT US</h3>
+          <div>
+            <i class="fas fa-map-marker-alt"></i>
+            139, Kamala Nagar, Charbagh, New Delhi, India - 236545
+          </div>
+          <div>
+            <i class="far fa-envelope"></i>
+            info@shoemaker.com
+          </div>
+          <div>
+            <i class="fas fa-phone"></i>
+            +91 75557 78964
+          </div>
+          <div></div>
+            <i class="far fa-paper-plane"></i>
+            New Delhi, India
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
