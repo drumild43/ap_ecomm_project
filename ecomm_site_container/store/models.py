@@ -40,10 +40,12 @@ class Order(models.Model):
     CONFIRMED = 'C'
     TRANSIT = 'T'
     DELIVERED = 'D'
+    CANCELLED = 'C'
     STATUS_CHOICES = [
         (CONFIRMED, 'Confirmed'),
         (TRANSIT, 'In Transit'),
         (DELIVERED, 'Delivered'),
+        (CANCELLED, 'Cancelled')
     ]
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=CONFIRMED)
 
