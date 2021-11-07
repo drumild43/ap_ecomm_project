@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.base_user import AbstractBaseUser
 
 class Product(models.Model):
     name = models.CharField(max_length=250)
@@ -17,13 +18,16 @@ class Product(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
-class EcomUser(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone_num = models.CharField(max_length=20)
+class EcomUser(AbstractBaseUser):
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.EmailField(unique=True)
+    address = models.TextField(null=True)
     cart = models.OneToOneField('Cart', on_delete=models.SET_NULL, null=True)
-    # password?
+
+    EMAIL_FIELD = 'email'
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
 class Cart(models.Model):
     pass
@@ -40,7 +44,7 @@ class Order(models.Model):
     CONFIRMED = 'C'
     TRANSIT = 'T'
     DELIVERED = 'D'
-    CANCELLED = 'C'
+    CANCELLED = 'X'
     STATUS_CHOICES = [
         (CONFIRMED, 'Confirmed'),
         (TRANSIT, 'In Transit'),
