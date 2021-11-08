@@ -2,23 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="shortcut icon" href="./images/icon.jpg" type="image/x-icon">
-     <!-- Box icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-  
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="./css/styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <title>TSM-Products</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    
+    <title>TSM</title>
   </head>
   <body>
     <!--Header-->
@@ -41,8 +30,11 @@
             <ul class="navigation-list">
               <li>
                 <div class="searchbar">
-                  <input class="search_input" type="text" name="alt" placeholder="Search...">
-                  <a href="#" class="search_bar"><i class="fas fa-search "></i></a>
+                  <input id ="inputbar"  class="search_input" type="text" name="inputbar" placeholder="Search..." autocomplete="chrome-off">
+                  <a href="#" class="search_bar"><i type="submit" class="fas fa-search "></i></a>
+                  <div class="results">
+                    <ul></ul>
+                  </div>
                 </div>
               </li>
               <li class="navigation-item">
@@ -118,8 +110,8 @@
                   </ul>
               </div>
               <div class="prods-footer">
-                  <a href="prods-details.html">
-                      <h3>Boy’s T-Shirt</h3>
+                  <a href="product-details.html">
+                      <h3>Asian Future-01</h3>
                   </a>
                   <div class="rating">
                       <i class="bx bxs-star fa-xs"></i>
@@ -128,7 +120,7 @@
                       <i class="bx bx-star fa-xs"></i>
                       <i class="bx bx-star fa-xs"></i>
                   </div>
-                  <h3 class="price">$50</h4>
+                  <h3 class="price">₹500</h4>
               </div>
           </div>  
           <div class="prods">
@@ -144,8 +136,8 @@
                 </ul>
             </div>
             <div class="prods-footer">
-                <a href="prods-details.html">
-                    <h3>Boy’s T-Shirt</h3>
+                <a href="product-details.html">
+                    <h3>ASIAN Wonder-13</h3>
                 </a>
                 <div class="rating">
                     <i class="bx bxs-star fa-xs"></i>
@@ -154,7 +146,7 @@
                     <i class="bx bx-star fa-xs"></i>
                     <i class="bx bx-star fa-xs"></i>
                 </div>
-                <h3 class="price">$50</h4>
+                <h3 class="price">₹6075</h4>
             </div>
         </div>  
         <div class="prods">
@@ -170,8 +162,8 @@
               </ul>
           </div>
           <div class="prods-footer">
-              <a href="prods-details.html">
-                  <h3>Boy’s T-Shirt</h3>
+              <a href="product-details.html">
+                  <h3>Bourge Loire-z126</h3>
               </a>
               <div class="rating">
                   <i class="bx bxs-star fa-xs"></i>
@@ -180,7 +172,7 @@
                   <i class="bx bx-star fa-xs"></i>
                   <i class="bx bx-star fa-xs"></i>
               </div>
-              <h3 class="price">$50</h4>
+              <h3 class="price">₹7864</h4>
           </div>
       </div>  
       <div class="prods">
@@ -196,8 +188,8 @@
             </ul>
         </div>
         <div class="prods-footer">
-            <a href="prods-details.html">
-                <h3>Boy’s T-Shirt</h3>
+            <a href="product-details.html">
+                <h3>Campus Rodeo-2</h3>
             </a>
             <div class="rating">
                 <i class="bx bxs-star fa-xs"></i>
@@ -206,7 +198,7 @@
                 <i class="bx bx-star fa-xs"></i>
                 <i class="bx bx-star fa-xs"></i>
             </div>
-            <h3 class="price">$50</h4>
+            <h3 class="price">₹9871</h4>
         </div>
       </div>
       <div class="prods">
@@ -222,8 +214,8 @@
             </ul>
         </div>
         <div class="prods-footer">
-            <a href="prods-details.html">
-                <h3>Boy’s T-Shirt</h3>
+            <a href="product-details.html">
+                <h3>Campus S-Cross</h3>
             </a>
             <div class="rating">
                 <i class="bx bxs-star fa-xs"></i>
@@ -232,7 +224,7 @@
                 <i class="bx bx-star fa-xs"></i>
                 <i class="bx bx-star fa-xs"></i>
             </div>
-            <h3 class="price">$50</h4>
+            <h3 class="price">₹1024</h4>
         </div>
     </div>
     <div class="prods">
@@ -248,8 +240,8 @@
           </ul>
       </div>
       <div class="prods-footer">
-          <a href="prods-details.html">
-              <h3>Boy’s T-Shirt</h3>
+          <a href="product-details.html">
+              <h3>Campus Stonic</h3>
           </a>
           <div class="rating">
               <i class="bx bxs-star fa-xs"></i>
@@ -258,7 +250,7 @@
               <i class="bx bx-star fa-xs"></i>
               <i class="bx bx-star fa-xs"></i>
           </div>
-          <h3 class="price">$50</h4>
+          <h3 class="price">₹6301</h4>
       </div>
   </div>
   <div class="prods">
@@ -274,8 +266,8 @@
         </ul>
     </div>
     <div class="prods-footer">
-        <a href="prods-details.html">
-            <h3>Boy’s T-Shirt</h3>
+        <a href="product-details.html">
+            <h3>CAMPUS Gilbert</h3>
         </a>
         <div class="rating">
             <i class="bx bxs-star fa-xs"></i>
@@ -284,7 +276,7 @@
             <i class="bx bx-star fa-xs"></i>
             <i class="bx bx-star fa-xs"></i>
         </div>
-        <h3 class="price">$50</h4>
+        <h3 class="price">₹8100</h4>
     </div>
 </div>
 <div class="prods">
@@ -300,8 +292,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Campus Oxyfit</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -310,7 +302,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹4566</h4>
   </div>
 </div>
 <div class="prods">
@@ -326,8 +318,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Furo _Redchief</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -336,7 +328,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹4667</h4>
   </div>
 </div>
 <div class="prods">
@@ -352,8 +344,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Furo</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -362,7 +354,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹9648</h4>
   </div>
 </div>
 <div class="prods">
@@ -378,8 +370,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Furios-89</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -388,7 +380,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹4313</h4>
   </div>
 </div>
 <div class="prods">
@@ -404,8 +396,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>HRAVSO Grsk-p</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -414,7 +406,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹4312</h4>
   </div>
 </div>
 <div class="prods">
@@ -430,8 +422,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Lancer Hydra-46</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -440,7 +432,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹1255</h4>
   </div>
 </div>
 <div class="prods">
@@ -456,8 +448,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Nivia verdict</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -466,7 +458,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹2324</h4>
   </div>
 </div>
 <div class="prods">
@@ -482,8 +474,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Reebok Revolution</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -492,7 +484,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹3512</h4>
   </div>
 </div>
 <div class="prods">
@@ -508,8 +500,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>SPAPRX Sx0414g</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -518,7 +510,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹9884</h4>
   </div>
   </div>
 </div>
@@ -538,8 +530,8 @@
             </ul>
         </div>
         <div class="prods-footer">
-            <a href="prods-details.html">
-                <h3>Boy’s T-Shirt</h3>
+            <a href="product-details.html">
+                <h3>Amazon Nexus  </h3>
             </a>
             <div class="rating">
                 <i class="bx bxs-star fa-xs"></i>
@@ -548,7 +540,7 @@
                 <i class="bx bx-star fa-xs"></i>
                 <i class="bx bx-star fa-xs"></i>
             </div>
-            <h3 class="price">$50</h4>
+            <h3 class="price">₹9865</h4>
         </div>
     </div>  
     <div class="prods">
@@ -564,8 +556,8 @@
           </ul>
       </div>
       <div class="prods-footer">
-          <a href="prods-details.html">
-              <h3>Boy’s T-Shirt</h3>
+          <a href="product-details.html">
+              <h3>Bacca Bucci</h3>
           </a>
           <div class="rating">
               <i class="bx bxs-star fa-xs"></i>
@@ -574,7 +566,7 @@
               <i class="bx bx-star fa-xs"></i>
               <i class="bx bx-star fa-xs"></i>
           </div>
-          <h3 class="price">$50</h4>
+          <h3 class="price">₹9463</h4>
       </div>
   </div>  
   <div class="prods">
@@ -590,8 +582,8 @@
         </ul>
     </div>
     <div class="prods-footer">
-        <a href="prods-details.html">
-            <h3>Boy’s T-Shirt</h3>
+        <a href="product-details.html">
+            <h3>Cebtrio</h3>
         </a>
         <div class="rating">
             <i class="bx bxs-star fa-xs"></i>
@@ -600,7 +592,7 @@
             <i class="bx bx-star fa-xs"></i>
             <i class="bx bx-star fa-xs"></i>
         </div>
-        <h3 class="price">$50</h4>
+        <h3 class="price">₹9632</h4>
     </div>
 </div>  
 <div class="prods">
@@ -616,8 +608,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Converse</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -626,7 +618,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹3256</h4>
   </div>
 </div>
 <div class="prods">
@@ -640,8 +632,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Knoos</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -650,7 +642,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹6548</h4>
   </div>
 </div>
 <div class="prods">
@@ -666,8 +658,8 @@
     </ul>
 </div>
 <div class="prods-footer">
-    <a href="prods-details.html">
-        <h3>Boy’s T-Shirt</h3>
+    <a href="product-details.html">
+        <h3>Krasa</h3>
     </a>
     <div class="rating">
         <i class="bx bxs-star fa-xs"></i>
@@ -676,7 +668,7 @@
         <i class="bx bx-star fa-xs"></i>
         <i class="bx bx-star fa-xs"></i>
     </div>
-    <h3 class="price">$50</h4>
+    <h3 class="price">₹8976</h4>
 </div>
 </div>
 <div class="prods">
@@ -692,8 +684,8 @@
   </ul>
 </div>
 <div class="prods-footer">
-  <a href="prods-details.html">
-      <h3>Boy’s T-Shirt</h3>
+  <a href="product-details.html">
+      <h3>Neeman's Classics</h3>
   </a>
   <div class="rating">
       <i class="bx bxs-star fa-xs"></i>
@@ -702,7 +694,7 @@
       <i class="bx bx-star fa-xs"></i>
       <i class="bx bx-star fa-xs"></i>
   </div>
-  <h3 class="price">$50</h4>
+  <h3 class="price">₹8476</h4>
 </div>
 </div>
 <div class="prods">
@@ -718,8 +710,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Neeman's Slipons</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -728,7 +720,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹8543</h4>
 </div>
 </div>
 <div class="prods">
@@ -744,8 +736,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Puma Starlight</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -754,7 +746,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹8965</h4>
 </div>
 </div>
 <div class="prods">
@@ -770,8 +762,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Red chief</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -780,7 +772,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹5421</h4>
 </div>
 </div>
 <div class="prods">
@@ -796,8 +788,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Red Tape</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -806,7 +798,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹9665</h4>
 </div>
 </div>
 <div class="prods">
@@ -823,8 +815,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Reebok Reetek</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -833,7 +825,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹9000</h4>
 </div>
 </div>
 <div class="prods">
@@ -849,8 +841,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Rook</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -859,7 +851,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹7645</h4>
 </div>
 </div>
 <div class="prods">
@@ -875,8 +867,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Sparx Sd0323g</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -885,7 +877,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹8765</h4>
 </div>
 </div>
 <div class="prods">
@@ -901,8 +893,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>SPAPRX Sd0402g</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -911,7 +903,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹9640</h4>
 </div>
 </div>
 <div class="prods">
@@ -927,8 +919,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>FLite</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -937,7 +929,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹54654</h4>
 </div>
 </div>
 </div>
@@ -957,8 +949,8 @@
             </ul>
         </div>
         <div class="prods-footer">
-            <a href="prods-details.html">
-                <h3>Boy’s T-Shirt</h3>
+            <a href="product-details.html">
+                <h3>Addidas-addilet</h3>
             </a>
             <div class="rating">
                 <i class="bx bxs-star fa-xs"></i>
@@ -967,7 +959,8 @@
                 <i class="bx bx-star fa-xs"></i>
                 <i class="bx bx-star fa-xs"></i>
             </div>
-            <h3 class="price">$50</h4>
+            <h3 class="price">₹4098
+            </h4>
         </div>
     </div>  
     <div class="prods">
@@ -983,8 +976,8 @@
           </ul>
       </div>
       <div class="prods-footer">
-          <a href="prods-details.html">
-              <h3>Boy’s T-Shirt</h3>
+          <a href="product-details.html">
+              <h3>Benneton-evq</h3>
           </a>
           <div class="rating">
               <i class="bx bxs-star fa-xs"></i>
@@ -993,7 +986,7 @@
               <i class="bx bx-star fa-xs"></i>
               <i class="bx bx-star fa-xs"></i>
           </div>
-          <h3 class="price">$50</h4>
+          <h3 class="price">₹8778</h4>
       </div>
   </div>  
   <div class="prods">
@@ -1009,8 +1002,8 @@
         </ul>
     </div>
     <div class="prods-footer">
-        <a href="prods-details.html">
-            <h3>Boy’s T-Shirt</h3>
+        <a href="product-details.html">
+            <h3>Big-Foxbfs</h3>
         </a>
         <div class="rating">
             <i class="bx bxs-star fa-xs"></i>
@@ -1019,7 +1012,7 @@
             <i class="bx bx-star fa-xs"></i>
             <i class="bx bx-star fa-xs"></i>
         </div>
-        <h3 class="price">$50</h4>
+        <h3 class="price">₹8453</h4>
     </div>
 </div>  
 <div class="prods">
@@ -1035,8 +1028,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Des-tongs</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -1045,7 +1038,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹9874</h4>
   </div>
 </div>
 <div class="prods">
@@ -1061,8 +1054,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Doctor-extra</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -1071,7 +1064,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹4589</h4>
   </div>
 </div>
 <div class="prods">
@@ -1087,8 +1080,8 @@
     </ul>
 </div>
 <div class="prods-footer">
-    <a href="prods-details.html">
-        <h3>Boy’s T-Shirt</h3>
+    <a href="product-details.html">
+        <h3>Flite-FL</h3>
     </a>
     <div class="rating">
         <i class="bx bxs-star fa-xs"></i>
@@ -1097,7 +1090,7 @@
         <i class="bx bx-star fa-xs"></i>
         <i class="bx bx-star fa-xs"></i>
     </div>
-    <h3 class="price">$50</h4>
+    <h3 class="price">₹4668</h4>
 </div>
 </div>
 <div class="prods">
@@ -1113,8 +1106,8 @@
   </ul>
 </div>
 <div class="prods-footer">
-  <a href="prods-details.html">
-      <h3>Boy’s T-Shirt</h3>
+  <a href="product-details.html">
+      <h3>FLite-sc0</h3>
   </a>
   <div class="rating">
       <i class="bx bxs-star fa-xs"></i>
@@ -1123,7 +1116,7 @@
       <i class="bx bx-star fa-xs"></i>
       <i class="bx bx-star fa-xs"></i>
   </div>
-  <h3 class="price">$50</h4>
+  <h3 class="price">₹5463</h4>
 </div>
 </div>
 <div class="prods">
@@ -1139,8 +1132,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Pery-pao</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1149,7 +1142,8 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹8766
+</h4>
 </div>
 </div>
 <div class="prods">
@@ -1165,8 +1159,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Shoe-mate</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1175,7 +1169,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹4688</h4>
 </div>
 </div>
 <div class="prods">
@@ -1191,8 +1185,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Soulthreads-freeway</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1201,7 +1195,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹5463</h4>
 </div>
 </div>
 <div class="prods">
@@ -1217,8 +1211,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Zappy-m</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1227,7 +1221,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹6654</h4>
 </div>
 </div>
 <div class="prods">
@@ -1243,8 +1237,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Zerol-CLogs</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1253,7 +1247,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹4566</h4>
 </div>
 </div>
 <div class="prods">
@@ -1269,8 +1263,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Big-foxbfs</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1279,7 +1273,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹9648</h4>
 </div>
 </div>
 <div class="prods">
@@ -1295,8 +1289,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Flatheads</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1305,7 +1299,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹9415</h4>
 </div>
 </div>
 <div class="prods">
@@ -1321,8 +1315,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Svaar</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1331,7 +1325,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹4987</h4>
 </div>
 </div>
 <div class="prods">
@@ -1347,8 +1341,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Parx-SF0</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1357,7 +1351,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹4673</h4>
 </div>
 </div>
 </div>
@@ -1377,8 +1371,8 @@
             </ul>
         </div>
         <div class="prods-footer">
-            <a href="prods-details.html">
-                <h3>Boy’s T-Shirt</h3>
+            <a href="product-details.html">
+                <h3>Bata-scale</h3>
             </a>
             <div class="rating">
                 <i class="bx bxs-star fa-xs"></i>
@@ -1387,7 +1381,9 @@
                 <i class="bx bx-star fa-xs"></i>
                 <i class="bx bx-star fa-xs"></i>
             </div>
-            <h3 class="price">$50</h4>
+            <h3 class="price">₹5664
+
+            </h4>
         </div>
     </div>  
     <div class="prods">
@@ -1403,8 +1399,8 @@
           </ul>
       </div>
       <div class="prods-footer">
-          <a href="prods-details.html">
-              <h3>Boy’s T-Shirt</h3>
+          <a href="product-details.html">
+              <h3>Alberto-toressi-jeal</h3>
           </a>
           <div class="rating">
               <i class="bx bxs-star fa-xs"></i>
@@ -1413,7 +1409,7 @@
               <i class="bx bx-star fa-xs"></i>
               <i class="bx bx-star fa-xs"></i>
           </div>
-          <h3 class="price">$50</h4>
+          <h3 class="price">₹9868</h4>
       </div>
   </div>  
   <div class="prods">
@@ -1429,8 +1425,8 @@
         </ul>
     </div>
     <div class="prods-footer">
-        <a href="prods-details.html">
-            <h3>Boy’s T-Shirt</h3>
+        <a href="product-details.html">
+            <h3>Alberto-torresi</h3>
         </a>
         <div class="rating">
             <i class="bx bxs-star fa-xs"></i>
@@ -1439,7 +1435,7 @@
             <i class="bx bx-star fa-xs"></i>
             <i class="bx bx-star fa-xs"></i>
         </div>
-        <h3 class="price">$50</h4>
+        <h3 class="price">₹5463</h4>
     </div>
 </div>  
 <div class="prods">
@@ -1455,8 +1451,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Bata-Alfred</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -1465,7 +1461,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹4687</h4>
   </div>
 </div>
 <div class="prods">
@@ -1481,8 +1477,8 @@
       </ul>
   </div>
   <div class="prods-footer">
-      <a href="prods-details.html">
-          <h3>Boy’s T-Shirt</h3>
+      <a href="product-details.html">
+          <h3>Bata-Docie-li</h3>
       </a>
       <div class="rating">
           <i class="bx bxs-star fa-xs"></i>
@@ -1491,7 +1487,7 @@
           <i class="bx bx-star fa-xs"></i>
           <i class="bx bx-star fa-xs"></i>
       </div>
-      <h3 class="price">$50</h4>
+      <h3 class="price">₹3196</h4>
   </div>
 </div>
 <div class="prods">
@@ -1507,8 +1503,8 @@
     </ul>
 </div>
 <div class="prods-footer">
-    <a href="prods-details.html">
-        <h3>Boy’s T-Shirt</h3>
+    <a href="product-details.html">
+        <h3>Bata-edgar</h3>
     </a>
     <div class="rating">
         <i class="bx bxs-star fa-xs"></i>
@@ -1517,7 +1513,7 @@
         <i class="bx bx-star fa-xs"></i>
         <i class="bx bx-star fa-xs"></i>
     </div>
-    <h3 class="price">$50</h4>
+    <h3 class="price">₹6972</h4>
 </div>
 </div>
 <div class="prods">
@@ -1533,8 +1529,8 @@
   </ul>
 </div>
 <div class="prods-footer">
-  <a href="prods-details.html">
-      <h3>Boy’s T-Shirt</h3>
+  <a href="product-details.html">
+      <h3>Stylure</h3>
   </a>
   <div class="rating">
       <i class="bx bxs-star fa-xs"></i>
@@ -1543,7 +1539,7 @@
       <i class="bx bx-star fa-xs"></i>
       <i class="bx bx-star fa-xs"></i>
   </div>
-  <h3 class="price">$50</h4>
+  <h3 class="price">₹4566</h4>
 </div>
 </div>
 <div class="prods">
@@ -1559,8 +1555,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>RedTape-Leather</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1569,7 +1565,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹4564</h4>
 </div>
 </div>
 <div class="prods">
@@ -1585,8 +1581,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>plnk-439bl</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1595,7 +1591,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹7900</h4>
 </div>
 </div>
 <div class="prods">
@@ -1611,8 +1607,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>RedTape-0091</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1621,7 +1617,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹8987</h4>
 </div>
 </div>
 <div class="prods">
@@ -1637,8 +1633,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Mactree-K10</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1647,7 +1643,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹4856</h4>
 </div>
 </div>
 <div class="prods">
@@ -1663,8 +1659,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Bata-K9</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1673,7 +1669,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹8456</h4>
 </div>
 </div>
 <div class="prods">
@@ -1689,8 +1685,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Bata-Lace</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1699,7 +1695,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹4943</h4>
 </div>
 </div>
 <div class="prods">
@@ -1715,8 +1711,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Centrino-Original</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1725,7 +1721,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹5412</h4>
 </div>
 </div>
 <div class="prods">
@@ -1741,8 +1737,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Bata-SA05</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1751,7 +1747,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹5455</h4>
 </div>
 </div>
 <div class="prods">
@@ -1767,8 +1763,8 @@
 </ul>
 </div>
 <div class="prods-footer">
-<a href="prods-details.html">
-    <h3>Boy’s T-Shirt</h3>
+<a href="product-details.html">
+    <h3>Centrino-m</h3>
 </a>
 <div class="rating">
     <i class="bx bxs-star fa-xs"></i>
@@ -1777,7 +1773,7 @@
     <i class="bx bx-star fa-xs"></i>
     <i class="bx bx-star fa-xs"></i>
 </div>
-<h3 class="price">$50</h4>
+<h3 class="price">₹4562</h4>
 </div>
 </div>
 </div>
@@ -1811,6 +1807,7 @@
           <a href="account.html">My Accounts</a>
           <a href="account.html">Order History</a>
           <a href="wishlist.html">Wish List</a>
+          <a href="homepage.html">Log out</a>
         </div>
         <div class="footer-items">
           <h3>CONTACT US</h3>

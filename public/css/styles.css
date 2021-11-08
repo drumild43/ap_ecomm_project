@@ -144,7 +144,7 @@ li {
 .searchbar{
     margin-right: 2rem;
     background-color: rgb(252, 135, 135);
-    border-radius: 40px;
+    border-radius: 10px;
     padding: 10px;
     box-align: left;
     border: none;
@@ -158,6 +158,33 @@ li {
     font-size: 20px;
     line-height: 16px;
     color: whitesmoke;
+}
+.results{
+    padding: 0px;
+}
+
+.results ul {margin: 0; padding: 0; }
+.results ul li {
+  list-style: none;
+  
+  opacity: 0;
+  display: none;
+  padding: 8px 12px;
+  transition: all .5s linear;
+  color: white;
+}
+
+.show .results ul li {
+  opacity: 1;
+  display: block;
+}
+
+.show .results {
+  padding: 10px;
+}
+
+.results ul li:hover {
+  background: #ececec
 }
 .img-content{
     position: absolute;
@@ -515,19 +542,19 @@ button{
     height: 2.7rem;
 }
 
-.prods-details .details{
+.product-details .details{
     display: grid;
     grid-template-columns: 1fr 1.2fr;
     gap: 5rem;
     margin-top: 5rem;
 }
 
-.prods-details .left{
+.product-details .left{
     display: flex;
     flex-direction: column;
 
 }
-.prods-details .left .main {
+.product-details .left .main {
     text-align: center;
     background-color: #fdfdfd;
     margin-bottom: 1rem;
@@ -536,43 +563,43 @@ button{
     height: 33rem;
     
 }
-.prods-details .left .main img {
+.product-details .left .main img {
     object-fit: contain;
     height: 100%;
 }
 
   
-.prods-details .right h1 {
+.product-details .right h1 {
     font-size: 3rem;
     line-height: 1.2;
     margin-bottom: 1rem;
     color: rgb(98, 121, 250);
 }
-.prods-details  h3 {
+.product-details  h3 {
     font-size: 2rem;
     line-height: 1; 
 }
   
-.prods-details  h6 {
+.product-details  h6 {
     font-size: 1rem;
     line-height: 1; 
 }
   
-.prods-details .right .price {
+.product-details .right .price {
     font-size: 600;
     font-size: 2rem;
     color: #ff7c9c;
     
 }
   
-  .prods-details .right div {
+  .product-details .right div {
     display: inline-block;
     padding: 0;
     position: relative;
     z-index: 1;
   }
   
-  .prods-details .right select {
+  .product-details .right select {
     font-family: "Vollkorn", serif;
     display: inline-block;
     width: 20rem;
@@ -582,7 +609,7 @@ button{
     
   }
   
-.prods-details form {
+.product-details form {
     margin-bottom: 2rem;
     display: inline-block;
     background: none;
@@ -591,14 +618,14 @@ button{
   
   
   
-.prods-details .form input {
+.product-details .form input {
     padding: 0.8rem;
     text-align: center;
     width: 3.5rem;
     margin-right: 2rem;
 }
   
-.prods-details .form .addCart {
+.product-details .form .addCart {
     background: #ff7c9c;
     padding: 0.8rem 4rem;
     color: #fff;
