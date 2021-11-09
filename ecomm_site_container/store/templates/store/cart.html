@@ -1,24 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="shortcut icon" href="./images/icon.jpg" type="image/x-icon">
-     <!-- Box icons -->
+  <meta charset="utf-8" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-  
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="./css/styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <title>TSM-My Cart</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    
+    <title>TSM</title>
   </head>
   <body>
     <!--Header-->
@@ -41,8 +29,11 @@
             <ul class="navigation-list">
               <li>
                 <div class="searchbar">
-                  <input class="search_input" type="text" name="alt" placeholder="Search...">
-                  <a href="#" class="search_bar"><i class="fas fa-search "></i></a>
+                  <input id ="inputbar"  class="search_input" type="text" name="inputbar" placeholder="Search..." autocomplete="chrome-off">
+                  <a href="#" class="search_bar"><i type="submit" class="fas fa-search "></i></a>
+                  <div class="results">
+                    <ul></ul>
+                  </div>
                 </div>
               </li>
               <li class="navigation-item">
@@ -58,7 +49,7 @@
                 <a href="#contact" class="Navigation-link" >Contact</a>
               </li>
               <li class="navigation-item">
-                <a href="account.html" class="Navigation-link" >Hello {{}}#User_Name</a>
+                <a href="account.html" class="Navigation-link" >Hello #User_Name</a>
               </li>
               <li class="navigation-item">
                 <a href="Cart.html" class="Navigation-link" ><i class="bx bx-shopping-bag"></i>
@@ -86,14 +77,13 @@
         <h3 class="Heading">Shopping Cart</h3>
         <h5 class="remove">Remove all</h5>
         </div>
-        {% for item in items %}
         <div class="Cartitems">
           <div class="imgb">
           <img src="./images/tp4.png"/>
           </div>
           <div class="itom">
-          <h1 class="Name">{{item.product.name}}</h1>
-          <h3 class="Description">{{item.product.description}}</h3>
+          <h1 class="Name">Olivers' Special</h1>
+          <h3 class="Description">Formal </h3>
           
           </div>
           <div class="Amount">
@@ -101,7 +91,28 @@
           </div>
 
           <div class="prices">
-            <div class="price">{{item.product.price|floatformat:2}}</div>
+            <div class="price">$50</div>
+            <a href="#">
+            <div class="Wisl">Add To WishList</div></a>
+            <div class="remove">Remove</div>
+          </div>
+          
+        </div>
+        <div class="Cartitems">
+          <div class="imgb">
+          <img src="./images/tp4.png"/>
+          </div>
+          <div class="itom">
+          <h1 class="Name">Olivers' Special</h1>
+          <h3 class="Description">Formal </h3>
+          
+          </div>
+          <div class="Amount">
+            <input type="number" value="1" min="1">
+          </div>
+
+          <div class="prices">
+            <div class="price">$50</div>
             <a href="#">
             <div class="Wisl">Add To WishList</div></a>
             <div class="remove">Remove</div>
@@ -109,17 +120,15 @@
           
         </div>
         
-        {% endfor %}  
-
         <div class="tp">
           <table>
             <tr>
               <td>Subtotal</td>
-              <td>{{order.cart_total}}</td>
+              <td>$200</td>
             </tr>
             <tr>
               <td>Items</td>
-              <td>{{order.cart_quantity}}</td>
+              <td>3</td>
             </tr>
           </table>
           <a href="checkout.html" class="check-button">Proceed To Checkout</a>
@@ -143,7 +152,7 @@
           <a href="#" >Privacy Policy</a>
           <a href="#">Terms & Conditions</a>
         
-        </div
+        </div>
         <div class="footer-items">
           <h3>
             ACCOUNTS
@@ -151,6 +160,7 @@
           <a href="account.html">My Accounts</a>
           <a href="account.html">Order History</a>
           <a href="wishlist.html">Wish List</a>
+          <a href="homepage.html">Log out</a>
         </div>
         <div class="footer-items">
           <h3>CONTACT US</h3>
@@ -173,8 +183,5 @@
         </div>
       </div>
     </section>
-
-    <script type="text/javascript" src="{% static js/cart.js %}"></script>
-
   </body>
 </html>
