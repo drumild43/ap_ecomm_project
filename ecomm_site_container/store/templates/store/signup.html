@@ -1,51 +1,61 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-  <link rel="stylesheet" href="./css/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="shortcut icon" href="{% static 'store/images/icon.jpg' %}" type="image/x-icon">
+     <!-- Box icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
   
-  <title>TSM</title>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="{% static 'store/css/styles.css' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    
+    <title>TSM</title>
   </head>
+
   <body>
+    <section class="signup">
+      <div class="logo">
+        <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
+        The Shoes Maker
+      </div>
 
-<section class="signup">
+      <div class="pger">
+        <form action="{% url 'store:signup' %}" method="post"> 
+          {% csrf_token %}
+          <div class="tit">
+            <h1>Sign up</h1>
+          </div>
 
-
-    <div class="logo">
-        <img src="./images/icon1.png" alt="" class="TSM">
-       
-            The Shoes Maker
-        </div>
-        
-    </div>
-    <div class="pger">
-    <form > 
-        <div class="tit">
-        <h1>
-        Sign up </h1></div>
-        <div class="signupcontainer">   
+          <div class="signupcontainer">
+            <input type="text" placeholder="Enter First Name" name="first_name" {% if first_name %} value="{{ first_name }}" {% endif %} required>  
+            <input type="text" placeholder="Enter Last Name" name="last_name" {% if last_name %} value="{{ last_name }}" {% endif %} required>  
+            <input type="text" placeholder="Enter Email ID" name="email" {% if email %} value="{{ email }}" {% endif %} required>  
              
-            <input type="text" placeholder="Enter Name" name="Name" required>  
-            <input type="text" placeholder="Enter Email ID" name="Email" required>  
-             
-            <input type="password" placeholder="Enter Password" name="password" required>  
-            <input type="password" placeholder="Retype Password" name="password" required>  
-            
-            <a href="#">
-            <button type="submit" name="signup-button" value="sign up">Sign up</button>
-          </a>
-              
-            </div>
-            <div class="social-media">
-              <span class="signinwith">
-              Sign in via Social Media<br/></span>
-              <a href="https://accounts.google.com/servicelogin"></a>
-              <button class="google">Log in with google</button>
-            </div>
-    </form> 
-</div>  
+            <input type="password" placeholder="Enter Password" name="password1" required>  
+            <input type="password" placeholder="Retype Password" name="password2" required>
+
+            <textarea placeholder="Enter Address" name="address" rows="5" cols="42" required>{% if address %}{{ address }}{% endif %}</textarea>
+            <br>
+            <input type="submit" name="signup-button" value="Sign up">
+
+            {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+          </div>
+        </form>
+      </div>
     </section>
-    </body>
+  </body>
+
 </html>

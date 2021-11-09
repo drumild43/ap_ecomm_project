@@ -22,8 +22,9 @@ class EcomUser(AbstractBaseUser):
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
-    address = models.TextField(null=True)
+    address = models.TextField()
     cart = models.OneToOneField('Cart', on_delete=models.SET_NULL, null=True)
+    logged_in = models.BooleanField(default=False)
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'

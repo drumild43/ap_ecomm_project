@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    < <meta charset="utf-8" />
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="{% static 'store/css/styles.css' %}" />
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     
@@ -15,28 +16,34 @@
 
 
     <div class="logo">
-        <img src="./images/icon1.png" alt="" class="TSM">
+        <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
        
             The Shoes Maker
         </div>
         
     </div>
     <div class="pger">
-    <form action="action_page.php" method="post"> 
+    <form action="{% url 'store:signin' %}" method="post">
+        {% csrf_token %} 
         <div class="tit">
         <h1>
-        Login In </h1></div>
+        Log in </h1></div>
         <div class="sign-container">   
-             
-            <input type="text" placeholder="Enter Email ID" name="Email" required>  
-               
+            <input type="text" placeholder="Enter Email ID" name="email" required>  
             <input type="password" placeholder="Enter Password" name="password" required>  
-            <button type="submit">Login</button>
+            
+            <input type="submit" value="Log in">
+
+            {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+            <br>
+            {% endif %}
+
             <div class="checker">
-            <input  type="checkbox" checked="checked"> Remember me 
-            &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            <a href="passreset.html"> Forgot  password?       </a> </div>
-             Not  a member?&nbsp  <a href="signup.html"> Create Account </a>   
+                <a href="passreset.html"> Forgot  password?</a> 
+            </div>
+            <br>
+            Not  a member?&nbsp  <a href="{% url 'store:signup' %}"> Create Account </a>   
         </div>   
     </form> 
 </div>  
