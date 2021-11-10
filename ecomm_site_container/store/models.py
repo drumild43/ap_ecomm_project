@@ -20,7 +20,9 @@ class Category(models.Model):
 
 class EcomUserManager(BaseUserManager):
     def create_user(self, email, password=None):
-        user = self.model(email=self.normalize_email(email))
+        cart = Cart()
+        user = self.model(email=self.normalize_email(email), cart = cart)
+        cart.save()
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -58,7 +60,7 @@ class EcomUser(AbstractBaseUser):
         return self.is_admin
 
 class Cart(models.Model):
-    pass
+    is_empty = models.BooleanField(default=True)
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
