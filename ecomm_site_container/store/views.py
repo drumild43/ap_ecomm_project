@@ -4,11 +4,13 @@ from django.urls import reverse
 
 from .models import EcomUser, Cart
 
-# Display Hello, userfullname if user logged in; implement on all pages !!!!!!!!!!
-
-# incomplete!!!!
-def home(request):
-    return render(request, 'store/homepage.html', context={})
+def home(request, user_id=None):
+    if user_id:
+        curr_user = EcomUser.objects.get(pk=user_id)
+        context = {'curr_user': curr_user}
+    else:
+        context = {}
+    return render(request, 'store/homepage.html', context=context)
 
 def signup(request):
     if request.method == 'GET':
@@ -42,7 +44,7 @@ def signup(request):
             new_user.set_password(password1)
             new_user.save()
 
-            return HttpResponseRedirect(reverse('store:homepage'))
+            return HttpResponseRedirect(reverse('store:homepage', args=(new_user.id,)))
 
         # else prompt that passwords do not match
         else:
@@ -73,8 +75,15 @@ def signin(request):
         if ecomuser.check_password(password):
             ecomuser.logged_in = True
             ecomuser.save()
-            return HttpResponseRedirect(reverse('store:homepage'))
+            return HttpResponseRedirect(reverse('store:homepage', args=(ecomuser.id,)))
+
         else:
             return render(request, 'store/signin.html', context={'error_message': "Incorrect password."})
 
-# def logout(request):
+def logout(request, user_id):
+    if request.method == 'POST':
+        curr_user = EcomUser.objects.get(pk=user_id)
+        curr_user.logged_in = False
+        curr_user.save()
+
+    return HttpResponseRedirect(reverse('store:anon_homepage'))

@@ -55,6 +55,12 @@
                 </a>
               </li>
               <li class="navigation-item">
+                <form action="{% url 'store:logout' %}" method="post">
+                  {% csrf_token %}
+                  <input type="submit" name="logout-button" value="LOG OUT">
+                </form>
+              </li>
+              <li class="navigation-item">
                 <a href="Cart.html" class="Navigation-link" ><i class="bx bx-shopping-bag"></i></a>
                 <span class='badge badge-warning' id='lblCartCount'> 0 </span>
   
