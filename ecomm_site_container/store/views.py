@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-from .models import EcomUser
+from .models import EcomUser, Cart
 
 # Display Hello, userfullname if user logged in; implement on all pages !!!!!!!!!!
 
@@ -28,13 +28,17 @@ def signup(request):
 
         # else, create new user if passwords match
         elif password1 == password2:
+            new_cart = Cart()
+
             new_user = EcomUser(
                 first_name=first_name, 
                 last_name=last_name, 
                 email=email, 
                 address=address,
+                cart = new_cart,
                 logged_in = True
             )
+            new_cart.save()
             new_user.set_password(password1)
             new_user.save()
 
