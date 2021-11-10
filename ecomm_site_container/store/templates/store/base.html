@@ -49,17 +49,22 @@
               <li class="navigation-item">
                 <a href="#contact" class="Navigation-link" >Contact</a>
               </li>
+              {% if curr_user %}
               <li class="navigation-item">
-                <a href="account.html" class="Navigation-link" >Hello #user
-                  _Name
+                <a href="account.html" class="Navigation-link" >Hello {{ curr_user.first_name}}
                 </a>
               </li>
               <li class="navigation-item">
-                <form action="{% url 'store:logout' %}" method="post">
+                <form action="{% url 'store:logout' curr_user.id %}" method="post">
                   {% csrf_token %}
                   <input type="submit" name="logout-button" value="LOG OUT">
                 </form>
               </li>
+              {% else %}
+              <li class="navigation-item">
+                <a href="signin.html" class="Navigation-link" >Login</a>
+              </li>
+              {% endif %}
               <li class="navigation-item">
                 <a href="Cart.html" class="Navigation-link" ><i class="bx bx-shopping-bag"></i></a>
                 <span class='badge badge-warning' id='lblCartCount'> 0 </span>
