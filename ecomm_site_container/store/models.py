@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class Product(models.Model):
     name = models.CharField(max_length=250)
@@ -18,17 +18,44 @@ class Product(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
+class EcomUserManager(BaseUserManager):
+    def create_user(self, email, password=None):
+        user = self.model(email=self.normalize_email(email))
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None):
+        user = self.create_user(email, password=password)
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
+
 class EcomUser(AbstractBaseUser):
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
     email = models.EmailField(unique=True)
-    address = models.TextField()
+    address = models.TextField(blank=True)
     cart = models.OneToOneField('Cart', on_delete=models.SET_NULL, null=True)
     logged_in = models.BooleanField(default=False)
 
+    is_admin = models.BooleanField(default=False)
+
+    objects = EcomUserManager()
+
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = []
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.is_admin
 
 class Cart(models.Model):
     pass
