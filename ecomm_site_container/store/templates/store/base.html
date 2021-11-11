@@ -55,9 +55,9 @@
                 </a>
               </li>
               <li class="navigation-item">
-                <form action="{% url 'store:logout' curr_user.id %}" method="post">
+                <form action="{% url 'store:logout' curr_user.id %}" method="post" style="padding: 0px;">
                   {% csrf_token %}
-                  <input type="submit" name="logout-button" value="LOG OUT">
+                  <button type="submit" style="margin: 0 0; padding: 1em; border: 0px">LOGOUT</button>
                 </form>
               </li>
               {% else %}
