@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
+from .models import Product
 from .models import EcomUser, Cart
 
 def home(request, user_id=None):
@@ -87,3 +88,106 @@ def logout(request, user_id):
         curr_user.save()
 
     return HttpResponseRedirect(reverse('store:anon_homepage'))
+
+def products(request):
+    products = Product.objects.all()
+    srch_prods = []
+    filter_prods = []
+
+    if request.method == 'GET':
+        srch = request.GET.get('inputbar')
+        cat_sports = request.GET.get('cat_sports')
+        cat_formal = request.GET.get('cat_formal')
+        cat_flipflops = request.GET.get('cat_flipflops')
+        cat_casual = request.GET.get('cat_casual')
+        sort_HtoL = request.GET.get('sort_H_to_L')
+        sort_LtoH = request.GET.get('sort_L_to_H')
+        if srch:
+            for product in products:
+                if srch in product.name.lower() or srch in product.description.lower() or srch in product.category.lower():
+                    srch_prods += product
+
+            products = []
+            products += srch_prods    
+
+            if products == []:
+                errormessage = 'No match for your search'
+                context = {'products': products, 'errormessage': errormessage}
+            else:
+                context = {'products': products}
+            return render(request, 'store/product.html', context)
+
+        if sort_HtoL:
+            if cat_sports:
+                filter_prods += Product.objects.filter(category__name = cat_sports)
+            
+            if cat_formal:
+                filter_prods += Product.objects.filter(category__name = cat_formal)
+
+            if cat_flipflops:
+                filter_prods += Product.objects.filter(category__name = cat_flipflops)
+
+            if cat_casual:
+                filter_prods += Product.objects.filter(category__name = cat_casual)
+                
+            if filter_prods == []:
+                filter_prods += Product.objects.order_by('-price')
+                products = []
+                products += filter_prods
+                context = {'products': products}
+                return render(request, 'store/product.html', context)
+            
+            products = []
+            products += filter_prods
+            context = {'products': products}
+
+            return render(request, 'store/product.html', context)
+
+        if sort_LtoH:
+            if cat_sports:
+                filter_prods += Product.objects.filter(category__name = cat_sports)
+            
+            if cat_formal:
+                filter_prods += Product.objects.filter(category__name = cat_formal)
+
+            if cat_flipflops:
+                filter_prods += Product.objects.filter(category__name = cat_flipflops)
+
+            if cat_casual:
+                filter_prods += Product.objects.filter(category__name = cat_casual)
+            
+            if filter_prods == []:
+                filter_prods += Product.objects.order_by('price')
+                products = []
+                products += filter_prods
+                context = {'products': products}
+                return render(request, 'store/product.html', context)
+
+            #not sure how to sort after filtering
+
+            products = []
+            products += filter_prods
+            context = {'products': products}
+
+            return render(request, 'store/product.html', context)
+
+        if cat_sports:
+            filter_prods += Product.objects.filter(category__name = cat_sports)
+            
+        if cat_formal:
+            filter_prods += Product.objects.filter(category__name = cat_formal)
+
+        if cat_flipflops:
+            filter_prods += Product.objects.filter(category__name = cat_flipflops)
+
+        if cat_casual:
+            filter_prods += Product.objects.filter(category__name = cat_casual)
+
+        products = []
+        products += filter_prods
+        context = {'products': products}
+        return render(request, 'store/product.html', context)
+
+    all_prods = 'All products'            
+    context = {'products': products, 'all_prods': all_prods}
+    return render(request, 'store/product.html', context)

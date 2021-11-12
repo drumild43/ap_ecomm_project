@@ -30,11 +30,14 @@
             <ul class="navigation-list">
               <li>
                 <div class="searchbar">
-                  <input id ="inputbar"  class="search_input" type="text" name="inputbar" placeholder="Search..." autocomplete="chrome-off">
-                  <a href="#" class="search_bar"><i type="submit" class="fas fa-search "></i></a>
-                  <div class="results">
-                    <ul></ul>
-                  </div>
+                  <form action = "{% url 'store:products' %}" method = 'get'>
+                    <input id ="inputbar"  class="search_input" type="text" name="inputbar" placeholder="Search..." autocomplete="chrome-off">
+                    <!--not sure-->
+                    <a href="#" class="search_bar"><i type="submit" class="fas fa-search "></i></a>
+                    <div class="results">
+                      <ul></ul>
+                    </div>
+                  </form>
                 </div>
               </li>
               <li class="navigation-item">

@@ -1,4 +1,3 @@
-
 *,
 *::before,
 *::after {
@@ -430,7 +429,8 @@ button{
 .top-container{
     margin-top: 5px;
     background-color: none;
-    text-align: right;
+    text-align: center;
+    color: blue;
     top: 0;
     justify-content: space-around;
 }
@@ -442,7 +442,7 @@ button{
     
 }
 .top-container form{
-    background-color: red;
+    
     display: inline-block;
     margin-bottom: 10px;
     border:none;
@@ -455,6 +455,13 @@ button{
     width: auto;
     padding: 1rem;
     
+}
+.top-container input{
+    border: none;
+    background-color: none;
+    background: none;
+    outline: none;
+    color: blue;
 }
 .prods-center {
     display: grid;
@@ -873,3 +880,7 @@ button{
     border-radius: 10px; 
     transition: 0.25s ease;  
 }  
+
+.top-container .filter{
+    background-color: none;
+}
