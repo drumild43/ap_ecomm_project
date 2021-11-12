@@ -163,7 +163,10 @@ li {
     padding: 0px;
 }
 
-.results ul {margin: 0; padding: 0; }
+.results ul {
+    margin: 0; 
+    padding: 0; 
+}
 .results ul li {
   list-style: none;
   
@@ -632,7 +635,21 @@ button{
     color: #fff;
     border-radius: 3.5rem;
 }
+.right .reviews img{
+    object-fit: contain;
+    height: 10rem;
+    border-radius: 20rem;
+    margin-top: 1rem;
+}
+.name{
+    margin-top: 2rem;
+    margin-left: 5rem;
+    
 
+}
+.reviews .rating{
+    margin-left: 5rem;
+}
 .cart-header{
     margin-bottom: 7rem;
 }
@@ -838,3 +855,21 @@ button{
 .but-update{
     margin-left: 10rem;
 }
+.review-container{
+    
+    font-size: 17px;
+    padding: 25px;
+    width: 600px;
+    height: 20px;
+}
+.review-container input[type=text]{ 
+    display: table;  
+    width: 100%;   
+    margin: 8px 0;  
+    padding: 12px 20px;   
+    display: inline-block;   
+    border: none; 
+    box-sizing: border-box;  
+    border-radius: 10px; 
+    transition: 0.25s ease;  
+}  
