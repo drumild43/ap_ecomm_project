@@ -50,27 +50,41 @@
       </tr>
     </table>
   </center>
-
+  <br>
     <div class="personal-info">
       <div class="prdt-box">
         <div class="content">
           <table>
             <tr>
-            <td><h2> <a href="pers-details.html"><u>Update Personal Info</u></a></h2></td>
-              <td><h2> Your Addess:-</h2> <br/><h4> 139, Kamala Nagar, Charbagh, New Delhi, India - 236545</h4></td>
-              </tr>
-              <tr>
-                <td>
+              <td>
+                <h2>Update Personal Info</h2>
+              </td>
+              
+              <td style="padding-bottom: 1em; padding-left: 4rem;">
+                <h2>Your Address:-</h2>
+                <div style="margin-left: 10rem; width: 80%;">
+                  <div style="text-align: center; color: white;">
+                    {{ curr_user.address|linebreaks }}
+                  </div>
+                </div>
+              </td>
+            </tr>
 
-                </td>
-                <td>
-                  <a href="address.html">
-                    <div class="but-update">
-
-                      <button type="" name="Update-address" value="Update">Update Address</button>
-                    </div>
-                    </a>
-                </td>
+            <tr>
+              <td>
+                <div class="but-update">
+                  <form action="{% url 'store:pers-details' curr_user.id %}" method="get" style="padding: 0px; margin-left: 2rem;">
+                    <button type="submit" style="margin: 0; font-size: 1.1rem;">Update Info</button>
+                  </form>
+                </div>
+              </td>
+              <td>
+                <div class="but-update">
+                  <form action="{% url 'store:address' curr_user.id %}" method="get" style="padding: 0px; margin-left: 8rem;">
+                    <button type="submit" style="margin: 0; border: 0px; font-size: 1.1rem;">Update Address</button>
+                  </form>
+                </div>
+              </td>
             </tr>
           </table>
         </div>        

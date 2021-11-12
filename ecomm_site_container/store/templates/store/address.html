@@ -4,41 +4,33 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-    <link rel="stylesheet" href="{% static 'store/css/styles.css %}" />
+    <link rel="stylesheet" href="{% static 'store/css/styles.css' %}" />
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     
     <title>TSM</title>
   </head>
+
   <body>
-
-<section class="signup">
-
-
-    <div class="logo">
+    <section class="signup">
+      <div class="logo">
         <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
-       
-            The Shoes Maker
-        </div>
-        
-    </div>
-    <div class="pger">
-    <form > 
-        <div class="tit">
-        <h1>
-        Update Address</h1></div>
-        <div class="updatecontainer">   
-             
-            <input type="text" placeholder="Enter New Address" name="Name" />  
+        The Shoes Maker
+      </div>
+      
+      <div class="pger">
+        <form action="{% url 'store:address' curr_user.id%}" method="post">
+          {% csrf_token %}
+          <div class="tit">
+            <h1>Update Address</h1>
+          </div>
+          <div class="updatecontainer">
+            <textarea placeholder="Enter new address. Leave empty to return to profile." name="address" rows="8" cols="42"></textarea>  
             
-            <a href="#">
-            <button type="submit" name="Update-button" value="Update address">Update</button>
-          </a>
-              
-        </div>
-            
-    </form> 
-</div>  
+            <button type="submit">Update</button>
+          </div>
+        </form>
+      </div>  
     </section>
-    </body>
+  </body>
 </html>

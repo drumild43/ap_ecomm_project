@@ -191,3 +191,59 @@ def products(request):
     all_prods = 'All products'            
     context = {'products': products, 'all_prods': all_prods}
     return render(request, 'store/product.html', context)
+
+
+def account(request, user_id):
+    curr_user = EcomUser.objects.get(pk=user_id)
+    return render(request, 'store/account.html', context={'curr_user': curr_user})
+
+def pers_details(request, user_id):
+    curr_user = EcomUser.objects.get(pk=user_id)
+
+    if request.method == 'GET':
+        return render(request, 'store/pers-details.html', context={'curr_user': curr_user})
+
+    if request.method == 'POST':
+        curr_password = request.POST['curr_password'].strip()
+        new_first_name = request.POST.get('first_name')
+        new_last_name = request.POST.get('last_name')
+        new_password = request.POST.get('new_password')
+
+        if curr_user.check_password(curr_password):
+            if new_first_name:
+                curr_user.first_name = new_first_name
+
+            if new_last_name:
+                curr_user.last_name = new_last_name
+
+            if new_password:
+                curr_user.set_password(new_password)
+
+            curr_user.save()
+
+            return HttpResponseRedirect(reverse('store:account', args=(user_id,)))
+
+        # if current password entered is wrong
+        else:
+            context = {
+                'curr_user': curr_user,
+                'new_first_name': new_first_name,
+                'new_last_name': new_last_name,
+                'error_message': "The current password you have entered is incorrect."
+            }
+            return render(request, 'store/pers-details.html', context=context)
+
+def address(request, user_id):
+    curr_user = EcomUser.objects.get(pk=user_id)
+
+    if request.method == 'GET':
+        return render(request, 'store/address.html', context={'curr_user': curr_user})
+
+    if request.method == 'POST':
+        new_address = request.POST['address']
+        # if new_address is not "", update address
+        if new_address:
+            curr_user.address = new_address
+            curr_user.save()
+
+        return HttpResponseRedirect(reverse('store:account', args=(user_id,)))
