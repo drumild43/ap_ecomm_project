@@ -46,7 +46,8 @@
                   </ul>
               </div>
               <div class="prods-footer">
-                  <a href="product-details.html">
+									<!--Check if this is the right way to send id to views-->
+                  <a href="{% url 'store:product-details' product.id %}">
                       <h3>{{product.name}}</h3>
                   </a>
                   <div class="rating">

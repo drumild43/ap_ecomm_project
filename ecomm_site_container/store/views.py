@@ -247,3 +247,8 @@ def address(request, user_id):
             curr_user.save()
 
         return HttpResponseRedirect(reverse('store:account', args=(user_id,)))
+
+def product_details(request, id):
+    product = Product.objects.get(id = id)
+    context = {'product': product}
+    return render(request, 'store/product-details.html', context)
