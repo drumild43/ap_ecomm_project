@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 app_name = 'store'
@@ -12,6 +12,5 @@ urlpatterns = [
     path('<int:user_id>/account/', views.account, name='account'),
     path('<int:user_id>/address/', views.address, name='address'),
     path('<int:user_id>/personal-details/', views.pers_details, name='pers-details'),
-    path('product-details/<int:id>', views.product_details, name='product-details'),
-    path('accounts/', include('allauth.urls'))
+    path('product-details/<int:id>', views.product_details, name='product-details')
 ]

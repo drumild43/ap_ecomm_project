@@ -1,6 +1,4 @@
 {% load static %}
-{% load socialaccount %}
-{% provider_media_js %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,12 +52,6 @@
             {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
             {% endif %}
-          </div>
-          <div class="social-media">
-            <span class=signinwith">
-            Sign in via Social Media<br/></span>
-            <a href="{% provider_login_url "google" %}"></a>
-            <button class="google">Log in with google</button>
           </div>
         </form>
       </div>
