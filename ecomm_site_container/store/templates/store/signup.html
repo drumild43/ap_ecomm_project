@@ -31,7 +31,13 @@
       </div>
 
       <div class="pger">
-        <form action="{% url 'store:signup' %}" method="post"> 
+
+        {% if product_id %}
+        <form action="{% url 'store:product-signup-redirect' product_id %}" method="post">
+        {% else %}
+        <form action="{% url 'store:signup' %}" method="post">
+        {% endif %}
+        
           {% csrf_token %}
           <div class="tit">
             <h1>Sign up</h1>
@@ -48,6 +54,14 @@
             <textarea placeholder="Enter Address" name="address" rows="5" cols="42" required>{% if address %}{{ address }}{% endif %}</textarea>
             <br>
             <input type="submit" name="signup-button" value="Sign up">
+
+            {% if already_exists %}
+              {% if product_id %}
+              <p><strong>An account with this email already exists. Please <a href="{% url 'store:product-signin-redirect' product_id %}">log in</a> instead.</strong></p>
+              {% else %}
+              <p><strong>An account with this email already exists. Please <a href="{% url 'store:signin' %}">log in</a> instead.</strong></p>
+              {% endif %}
+            {% endif %}
 
             {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>

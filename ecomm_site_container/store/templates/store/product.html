@@ -4,64 +4,61 @@
 
 
   <section class="section all-products" id="products">
-      <div class="top-container">
-					{% if all_prods %}
-          <h1><b>All Products</b></h1>
-					{% endif %}
-          <form action = "{% url 'store:products' %}" method = "get">
-						<input type="checkbox" id="sort_H_to_L" name="sort_H_to_L" value="Sort_H_to_L">
-							<label for="sort_H_to_L"> Sort by Price (High to Low)</label>
-						<input type="checkbox" id="sort_L_to_H" name="sort_L_to_H" value="Sort_L_to_H">
-							<label for="sort_L_to_H"> Sort by Price (Low to High)</label>
-						<input type="checkbox" id="cat_sports" name="cat_sports" value="Cat_sports">
-							<label for="cat_sports"> Filter By Category (Sports)</label>
-						<input type="checkbox" id="cat_formal" name="cat_formal" value="Cat_formal">
-							<label for="cat_formal"> Filter By Category (Formal)</label>
-						<input type="checkbox" id="cat_flipflops" name="cat_flipflops" value="Cat_flipflops">
-							<label for="cat_flipflops"> Filter By Category (Flipflops)</label>
-						<input type="checkbox" id="cat_casual" name="cat_casual" value="Cat_casual">
-							<label for="cat_casual"> Filter By Category (Casual)</label><br>	
-						<button><input class= "but-fil" type="submit" value="Submit"></button>
-					</form>          
-      </div>
-
-			{% if errormessage %}
-			<h1><b>{{errormessage}}</b></h1>
-			{% endif %}
-      
+    <div class="top-container">
+      {% if all_prods %}
+      <h1><b>All Products</b></h1>
+      {% endif %}
+      <form action = "{% url 'store:products' %}" method = "get">
+        <input type="checkbox" id="sort_H_to_L" name="sort_H_to_L" value="Sort_H_to_L">
+        <label for="sort_H_to_L"> Sort by Price (High to Low)</label>
+        <input type="checkbox" id="sort_L_to_H" name="sort_L_to_H" value="Sort_L_to_H">
+        <label for="sort_L_to_H"> Sort by Price (Low to High)</label>
+        <input type="checkbox" id="cat_sports" name="cat_sports" value="Cat_sports">
+        <label for="cat_sports"> Filter By Category (Sports)</label>
+        <input type="checkbox" id="cat_formal" name="cat_formal" value="Cat_formal">
+        <label for="cat_formal"> Filter By Category (Formal)</label>
+        <input type="checkbox" id="cat_flipflops" name="cat_flipflops" value="Cat_flipflops">
+        <label for="cat_flipflops"> Filter By Category (Flipflops)</label>
+        <input type="checkbox" id="cat_casual" name="cat_casual" value="Cat_casual">
+        <label for="cat_casual"> Filter By Category (Casual)</label><br>	
         
-        <div class="prods-center container">
-					{% for product in products %}  
-          <div class="prods">
-              <div class="prods-hd">
-                  <img src="./images/ASIAN Future-01.jpg" alt="">
-                  <ul class="icons">
-                    <a href="wishlist.html">
-                      <span><i class="bx bx-heart"></i></span></a>
-                      <a href="#"> 
-                        <span>
-                          <i class="bx bx-shopping-bag"></i>
-                        </span>
-                      </a> 
-                  </ul>
-              </div>
-              <div class="prods-footer">
-									<!--Check if this is the right way to send id to views-->
-                  <a href="{% url 'store:product-details' product.id %}">
-                      <h3>{{product.name}}</h3>
-                  </a>
-                  <div class="rating">
-                      <i class="bx bxs-star fa-xs"></i>
-                      <i class="bx bxs-star fa-xs"></i>
-                      <i class="bx bxs-star fa-xs"></i>
-                      <i class="bx bx-star fa-xs"></i>
-                      <i class="bx bx-star fa-xs"></i>
-                  </div>
-                  <h3 class="price">{{product.price}}</h4>
-              </div>
-          </div>            
-					{% endfor %}
+        <button><input class= "but-fil" type="submit" value="Submit"></button>
+      </form>          
+    </div>
+    
+    {% if errormessage %}
+    <h1><b>{{ errormessage }}</b></h1>
+    {% endif %}
+    
+    <div class="prods-center container">
+      {% for product in products %}  
+      <div class="prods">
+        <div class="prods-hd">
+          <img src="./images/ASIAN Future-01.jpg" alt="">
+          <ul class="icons">
+            <a href="wishlist.html">
+              <span><i class="bx bx-heart"></i></span>
+            </a> 
+          </ul>
         </div>
+          
+        <div class="prods-footer">
+          <!--Check if this is the right way to send id to views-->
+          <a href="{% url 'store:product-details' product.id %}">
+            <h3>{{ product.name }}</h3>
+          </a>
+          <div class="rating">
+            <i class="bx bxs-star fa-xs"></i>
+            <i class="bx bxs-star fa-xs"></i>
+            <i class="bx bxs-star fa-xs"></i>
+            <i class="bx bx-star fa-xs"></i>
+            <i class="bx bx-star fa-xs"></i>
+          </div>
+          <h3 class="price">{{ product.price }}</h3>
+        </div>
+      </div>            
+      {% endfor %}
+    </div>
   </section>  
   
 {% endblock content %}

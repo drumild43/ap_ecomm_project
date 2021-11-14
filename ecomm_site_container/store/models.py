@@ -60,13 +60,13 @@ class EcomUser(AbstractBaseUser):
         return self.is_admin
 
 class Cart(models.Model):
-    is_empty = models.BooleanField(default=True)
+    total_quantity = models.PositiveIntegerField(default=0)
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveSmallIntegerField()
-    size = models.PositiveSmallIntegerField()
+    quantity = models.PositiveSmallIntegerField(default=0)
+    size = models.PositiveSmallIntegerField(null=True)
 
 class Order(models.Model):
     ordered_on = models.DateTimeField(auto_now_add=True)
@@ -88,7 +88,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     quantity = models.PositiveSmallIntegerField()
-    size = models.PositiveSmallIntegerField()
+    size = models.PositiveSmallIntegerField(null=True)
 
 """
 class Review(models.Model):

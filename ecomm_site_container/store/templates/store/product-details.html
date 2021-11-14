@@ -10,25 +10,41 @@
           </div>
         </div>
         <div class="right">
-          <h1>{{product.name}}</h1>
+          <h1>{{ product.name }}</h1>
           <div class="price">
-            {{product..price}} 
+            {{ product.price }} 
           </div>
           <br/>
-          <form>
-            <select>
-              <option value="Select You Size" selected disabled>Select Size</option>
-              <option value="1">6</option>
-              <option value="1">7</option>
-              <option value="1">8</option>
-              <option value="1">9</option>
-              <option value="1">10</option>
+
+          {% if curr_user %}
+          <form action="{% url 'store:add-to-cart' curr_user.id product.id %}" method="post">
+            {% csrf_token %}
+          {% else %}
+          <form action="{% url 'store:product-signin-redirect' product.id %}" method="get">
+          {% endif %}
+
+            <select name="size" required>
+              <option value="" selected disabled>Select Size</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
             </select>
+
+            <select name="quantity" required>
+              <option value="" selected disabled>Select Quantity</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+
+            <button type="submit" name="update-method" value="add" style="margin: 0; border: 0px; font-size: 1.1rem;">Add to Cart</button>
           </form>
-          <form class="form">
-            <input type="text" placeholder="1">
-            <a href="cart.html" class="addCart">Add To Cart</a>
-          </form>
+          
           <h4>Product Details</h4>
           <h6>{{product.description}}</h6>
             

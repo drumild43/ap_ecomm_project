@@ -23,8 +23,14 @@
         
     </div>
     <div class="pger">
+
+    {% if product_id %}
+    <form action="{% url 'store:product-signin-redirect' product_id %}" method="post">
+    {% else %}
     <form action="{% url 'store:signin' %}" method="post">
-        {% csrf_token %} 
+    {% endif %}
+
+    {% csrf_token %} 
         <div class="tit">
         <h1>
         Log in </h1></div>
@@ -39,11 +45,12 @@
             <br>
             {% endif %}
 
-            <div class="checker">
-                <a href="passreset.html"> Forgot  password?</a> 
-            </div>
-            <br>
-            Not  a member?&nbsp  <a href="{% url 'store:signup' %}"> Create Account </a>   
+            {% if product_id %}
+            <a href="{% url 'store:product-signup-redirect' product_id %}">Not a member? Create Account</a>
+            {% else %}
+            <a href="{% url 'store:signup' %}">Not a member? Create Account</a>
+            {% endif %}
+            
         </div>   
     </form> 
 </div>  

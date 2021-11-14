@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import Product
-from .models import EcomUser, Cart
+from .models import EcomUser, Cart, CartItem, Product
 
 def home(request, user_id=None):
     if user_id:
@@ -13,9 +12,9 @@ def home(request, user_id=None):
         context = {}
     return render(request, 'store/homepage.html', context=context)
 
-def signup(request):
+def signup(request, product_id=None):
     if request.method == 'GET':
-        return render(request, 'store/signup.html', context={})
+        return render(request, 'store/signup.html', context={'product_id': product_id})
 
     elif request.method == 'POST':
         first_name = request.POST['first_name'].strip()
@@ -26,8 +25,8 @@ def signup(request):
         address = request.POST['address']
         # if user already exists, prompt to sign in
         if list(EcomUser.objects.filter(email=email)):
-            error_message = "An account with this email already exists. Please sign in instead."
-            return render(request, 'store/signup.html', {'error_message': error_message})
+            context = {'already_exists': True, 'product_id': product_id}
+            return render(request, 'store/signup.html', context=context)
 
         # else, create new user if passwords match
         elif password1 == password2:
@@ -45,24 +44,31 @@ def signup(request):
             new_user.set_password(password1)
             new_user.save()
 
-            return HttpResponseRedirect(reverse('store:homepage', args=(new_user.id,)))
+            if product_id:
+                return HttpResponseRedirect(
+                    reverse('store:product-details', args=(new_user.id, product_id))
+                )
+            else:
+                return HttpResponseRedirect(reverse('store:homepage', args=(new_user.id,)))
 
         # else prompt that passwords do not match
         else:
-            error_message = "Passwords do not match."
             context = {
-                'error_message': error_message,
+                'error_message': "Passwords do not match.",
+                'product_id': product_id,
                 'first_name': first_name,
                 'last_name': last_name,
                 'email': email,
-                'address':address
+                'address': address
             }
             return render(request, 'store/signup.html', context=context)
 
 
-def signin(request):
+def signin(request, product_id=None):
+    context={'product_id': product_id}
+
     if request.method == 'GET':
-        return render(request, 'store/signin.html', context={})
+        return render(request, 'store/signin.html', context=context)
 
     elif request.method == 'POST':
         email = request.POST['email'].strip()
@@ -71,15 +77,24 @@ def signin(request):
         try:
             ecomuser = EcomUser.objects.get(email=email)
         except EcomUser.DoesNotExist:
-            return render(request, 'store/signin.html', context={'error_message': "No account with this email id exists."})
+            context['error_message'] = "No account with this email id exists."
+            return render(request, 'store/signin.html', context=context)
 
+        # if correct password
         if ecomuser.check_password(password):
             ecomuser.logged_in = True
             ecomuser.save()
-            return HttpResponseRedirect(reverse('store:homepage', args=(ecomuser.id,)))
 
+            if product_id:
+                return HttpResponseRedirect(
+                    reverse('store:product-details', args=(ecomuser.id, product_id))
+                )
+            else:
+                return HttpResponseRedirect(reverse('store:homepage', args=(ecomuser.id,)))
+        # incorrect password
         else:
-            return render(request, 'store/signin.html', context={'error_message': "Incorrect password."})
+            context['error_message'] = "Incorrect password."
+            return render(request, 'store/signin.html', context=context)
 
 def logout(request, user_id):
     if request.method == 'POST':
@@ -88,6 +103,61 @@ def logout(request, user_id):
         curr_user.save()
 
     return HttpResponseRedirect(reverse('store:anon_homepage'))
+
+def account(request, user_id):
+    curr_user = EcomUser.objects.get(pk=user_id)
+    return render(request, 'store/account.html', context={'curr_user': curr_user})
+
+def pers_details(request, user_id):
+    curr_user = EcomUser.objects.get(pk=user_id)
+
+    if request.method == 'GET':
+        return render(request, 'store/pers-details.html', context={'curr_user': curr_user})
+
+    if request.method == 'POST':
+        curr_password = request.POST['curr_password'].strip()
+        new_first_name = request.POST.get('first_name')
+        new_last_name = request.POST.get('last_name')
+        new_password = request.POST.get('new_password')
+
+        if curr_user.check_password(curr_password):
+            if new_first_name:
+                curr_user.first_name = new_first_name
+
+            if new_last_name:
+                curr_user.last_name = new_last_name
+
+            if new_password:
+                curr_user.set_password(new_password)
+
+            curr_user.save()
+
+            return HttpResponseRedirect(reverse('store:account', args=(user_id,)))
+
+        # if current password entered is wrong
+        else:
+            context = {
+                'curr_user': curr_user,
+                'new_first_name': new_first_name,
+                'new_last_name': new_last_name,
+                'error_message': "The current password you have entered is incorrect."
+            }
+            return render(request, 'store/pers-details.html', context=context)
+
+def address(request, user_id):
+    curr_user = EcomUser.objects.get(pk=user_id)
+
+    if request.method == 'GET':
+        return render(request, 'store/address.html', context={'curr_user': curr_user})
+
+    if request.method == 'POST':
+        new_address = request.POST['address']
+        # if new_address is not "", update address
+        if new_address:
+            curr_user.address = new_address
+            curr_user.save()
+
+        return HttpResponseRedirect(reverse('store:account', args=(user_id,)))
 
 def products(request):
     products = Product.objects.all()
@@ -192,63 +262,78 @@ def products(request):
     context = {'products': products, 'all_prods': all_prods}
     return render(request, 'store/product.html', context)
 
-
-def account(request, user_id):
-    curr_user = EcomUser.objects.get(pk=user_id)
-    return render(request, 'store/account.html', context={'curr_user': curr_user})
-
-def pers_details(request, user_id):
-    curr_user = EcomUser.objects.get(pk=user_id)
-
-    if request.method == 'GET':
-        return render(request, 'store/pers-details.html', context={'curr_user': curr_user})
-
-    if request.method == 'POST':
-        curr_password = request.POST['curr_password'].strip()
-        new_first_name = request.POST.get('first_name')
-        new_last_name = request.POST.get('last_name')
-        new_password = request.POST.get('new_password')
-
-        if curr_user.check_password(curr_password):
-            if new_first_name:
-                curr_user.first_name = new_first_name
-
-            if new_last_name:
-                curr_user.last_name = new_last_name
-
-            if new_password:
-                curr_user.set_password(new_password)
-
-            curr_user.save()
-
-            return HttpResponseRedirect(reverse('store:account', args=(user_id,)))
-
-        # if current password entered is wrong
-        else:
-            context = {
-                'curr_user': curr_user,
-                'new_first_name': new_first_name,
-                'new_last_name': new_last_name,
-                'error_message': "The current password you have entered is incorrect."
-            }
-            return render(request, 'store/pers-details.html', context=context)
-
-def address(request, user_id):
-    curr_user = EcomUser.objects.get(pk=user_id)
-
-    if request.method == 'GET':
-        return render(request, 'store/address.html', context={'curr_user': curr_user})
-
-    if request.method == 'POST':
-        new_address = request.POST['address']
-        # if new_address is not "", update address
-        if new_address:
-            curr_user.address = new_address
-            curr_user.save()
-
-        return HttpResponseRedirect(reverse('store:account', args=(user_id,)))
-
-def product_details(request, id):
-    product = Product.objects.get(id = id)
+def product_details(request, product_id, user_id=None):
+    product = Product.objects.get(id = product_id)
     context = {'product': product}
+
+    if user_id:
+        curr_user = EcomUser.objects.get(pk=user_id)
+        context['curr_user'] = curr_user
+
     return render(request, 'store/product-details.html', context)
+
+def cart(request, user_id, product_id=None, cartitem_id=None):
+    curr_user = EcomUser.objects.get(pk=user_id)
+    cart = Cart.objects.get(ecomuser__pk=user_id)
+
+    if request.method == 'GET':
+        cart_subtotal = 0
+        for cartitem in cart.cartitem_set.all():
+            cart_subtotal += cartitem.quantity * (cartitem.product.price)
+
+        context={'curr_user': curr_user, 'cart': cart, 'cart_subtotal': cart_subtotal}
+        return render(request, 'store/cart.html', context=context)
+
+    if request.method == 'POST':
+        update_method = request.POST['update-method']
+
+        # if add from product-details page
+        if update_method == "add":
+            item_quantity = int(request.POST['quantity'])
+            item_size = int(request.POST['size'])
+            cartitem_list = list(CartItem.objects.filter(product__pk=product_id).filter(size=item_size))
+
+            # if cartitem already exists
+            if cartitem_list:
+                cartitem = cartitem_list[0]
+                cartitem.quantity += item_quantity
+            # else, create cartitem
+            else:
+                cartitem = CartItem(
+                    cart = cart,
+                    product = Product.objects.get(pk=product_id),
+                    quantity = item_quantity,
+                    size = item_size
+                )
+            
+            cart.total_quantity += item_quantity
+            cart.save()
+            cartitem.save()
+
+        # if remove-all from cart page
+        if update_method == "remove-all":
+            CartItem.objects.filter(cart__pk=cart.id).delete()
+            cart.total_quantity = 0
+            cart.save()
+            
+        # if updates to specific cartitems from cart page
+        else:
+            cartitem = CartItem.objects.get(pk=cartitem_id)
+
+            if update_method == "decrease":
+                cartitem.quantity -= 1
+                cart.total_quantity -= 1
+
+            if update_method == "increase":
+                cartitem.quantity += 1
+                cart.total_quantity += 1
+            
+            cartitem.save()
+
+            if update_method == "remove" or cartitem.quantity == 0:
+                cart.total_quantity -= cartitem.quantity
+                cartitem.delete()
+
+            cart.save()
+
+        return HttpResponseRedirect(reverse('store:cart', args=(user_id,)))
