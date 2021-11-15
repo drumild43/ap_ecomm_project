@@ -38,17 +38,17 @@
             <input type="text" placeholder="Enter Email ID" name="email" required>  
             <input type="password" placeholder="Enter Password" name="password" required>  
             
-            <input type="submit" value="Log in">
+            <input type="submit" value="Log in" style="font-size: 1rem; margin: 5px;">
 
             {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
-            <br>
             {% endif %}
-
+            <br>
+            Not a member? 
             {% if product_id %}
-            <a href="{% url 'store:product-signup-redirect' product_id %}">Not a member? Create Account</a>
+            <a href="{% url 'store:product-signup-redirect' product_id %}" style="color: blue;"><u>Create Account</u></a>
             {% else %}
-            <a href="{% url 'store:signup' %}">Not a member? Create Account</a>
+            <a href="{% url 'store:signup' %}" style="color: blue;"><u>Create Account</u></a>
             {% endif %}
             
         </div>   

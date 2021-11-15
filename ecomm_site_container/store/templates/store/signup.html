@@ -44,22 +44,22 @@
           </div>
 
           <div class="signupcontainer">
-            <input type="text" placeholder="Enter First Name" name="first_name" {% if first_name %} value="{{ first_name }}" {% endif %} required>  
+            <input type="text" placeholder="Enter First Name" name="first_name" {% if first_name %} value="{{ first_name }}" {% endif %}  required>  
             <input type="text" placeholder="Enter Last Name" name="last_name" {% if last_name %} value="{{ last_name }}" {% endif %} required>  
             <input type="text" placeholder="Enter Email ID" name="email" {% if email %} value="{{ email }}" {% endif %} required>  
              
             <input type="password" placeholder="Enter Password" name="password1" required>  
             <input type="password" placeholder="Retype Password" name="password2" required>
 
-            <textarea placeholder="Enter Address" name="address" rows="5" cols="42" required>{% if address %}{{ address }}{% endif %}</textarea>
+            <textarea placeholder=" Enter Address" name="address" rows="5" cols="47" style="font-family: sans-serif;" required>{% if address %}{{ address }}{% endif %}</textarea>
             <br>
-            <input type="submit" name="signup-button" value="Sign up">
+            <input type="submit" name="signup-button" value="Sign up" style="font-size: 1rem;">
 
             {% if already_exists %}
               {% if product_id %}
-              <p><strong>An account with this email already exists. Please <a href="{% url 'store:product-signin-redirect' product_id %}">log in</a> instead.</strong></p>
+              <p><strong>An account with this email already exists. Please</strong> <a href="{% url 'store:product-signin-redirect' product_id %}" style="color: blue;"><u>log in</u></a> <strong>instead.</strong></p>
               {% else %}
-              <p><strong>An account with this email already exists. Please <a href="{% url 'store:signin' %}">log in</a> instead.</strong></p>
+              <p><strong>An account with this email already exists. Please</strong> <a href="{% url 'store:signin' %}" style="color: blue;"><u>log in</u></a> <strong>instead.</strong></p>
               {% endif %}
             {% endif %}
 
