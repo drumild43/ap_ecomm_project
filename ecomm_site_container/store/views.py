@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import EcomUser, Cart, CartItem, Product, Wishlist
+from .models import EcomUser, Cart, CartItem, Product, Wishlist, WishlistItem
 
 def home(request, user_id=None):
     if user_id:
@@ -277,7 +277,7 @@ def product_details(request, product_id, user_id=None):
 
 def cart(request, user_id, product_id=None, cartitem_id=None):
     curr_user = EcomUser.objects.get(pk=user_id)
-    cart = Cart.objects.get(ecomuser__pk=user_id)
+    cart = curr_user.cart
 
     if request.method == 'GET':
         cart_subtotal = 0
@@ -294,7 +294,11 @@ def cart(request, user_id, product_id=None, cartitem_id=None):
         if update_method == "add":
             item_quantity = int(request.POST['quantity'])
             item_size = int(request.POST['size'])
-            cartitem_list = list(CartItem.objects.filter(product__pk=product_id).filter(size=item_size))
+            cartitem_list = list(CartItem.objects.filter(
+                product__pk=product_id,
+                size=item_size,
+                cart__pk=cart.id
+            ))
 
             # if cartitem already exists
             if cartitem_list:
@@ -337,6 +341,64 @@ def cart(request, user_id, product_id=None, cartitem_id=None):
                 cart.total_quantity -= cartitem.quantity
                 cartitem.delete()
 
+            if update_method == "move-to-wl":
+                cart.total_quantity -= cartitem.quantity
+                
+                wlitem_list = list(WishlistItem.objects.filter(
+                    product__pk=cartitem.product.id,
+                    wishlist__pk=curr_user.wishlist.id
+                ))
+
+                # create item only if not in wishlist already
+                if not wlitem_list:
+                    wlitem = WishlistItem(
+                        wishlist=wishlist, 
+                        product=Product.objects.get(pk=product_id)
+                    )
+                    wlitem.save()
+
+                cartitem.delete()
+
             cart.save()
 
         return HttpResponseRedirect(reverse('store:cart', args=(user_id,)))
+
+def wishlist(request, user_id, product_id=None):
+    curr_user = EcomUser.objects.get(pk=user_id)
+    wishlist = curr_user.wishlist
+
+    if request.method == 'GET':
+        context = {'curr_user': curr_user, 'wishlist': wishlist}
+        return render(request, 'store/wishlist.html', context=context)
+
+    if request.method == 'POST':
+        update_method = request.POST['update-method']
+
+        # move from cart to wishlist is implemented in cart view
+
+        # if add from product-details page
+        if update_method == "add":
+            wlitem_list = list(WishlistItem.objects.filter(
+                product__pk=product_id,
+                wishlist__pk=wishlist.id
+            ))
+            
+            # create item only if not in wishlist already
+            if not wlitem_list:
+                wlitem = WishlistItem(
+                    wishlist=wishlist, 
+                    product=Product.objects.get(pk=product_id)
+                )
+                wlitem.save()
+            
+            return HttpResponseRedirect(reverse('store:wishlist', args=(user_id,)))
+
+        # if remove from wishlist page
+        if update_method == "remove":
+            WishlistItem.objects.filter(product__pk=product_id).delete()
+
+        # if remove-all from wishlist page
+        if update_method == "remove-all":
+            WishlistItem.objects.filter(wishlist__pk=wishlist.id).delete()
+
+        return HttpResponseRedirect(reverse('store:wishlist', args=(user_id,)))

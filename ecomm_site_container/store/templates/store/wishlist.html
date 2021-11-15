@@ -4,53 +4,36 @@
 
     <div class="Cart-Container">
       <div class="Header3">
-        <h3 class="Heading">Welcome to Wish List</h3>
-        <h5 class="remove">Remove all</h5>
-        </div>
-        <div class="Cartitems">
-          <div class="imgb">
-          <img src="./images/tp4.png"/>
-          </div>
-          <div class="itom">
-          <h1 class="Name">Olivers' Special</h1>
-          <h3 class="Description">Formal </h3>
-          
-          </div>
-          <div class="Amount">
-            <input type="number" value="1" min="1">
-          </div>
+        <h3 class="Heading">Your Wishlist</h3>
+        <form action="{% url 'store:wishlist' curr_user.id %}" method="post" style="padding: 0;">
+          {% csrf_token %}
+          <button type="submit" name="update-method" value="remove-all" style="margin-top: 0; padding: 1rem 2.5rem; font-size: 1rem;">
+            Remove All
+          </button>
+        </form>
+      </div>
 
-          <div class="prices">
-            <div class="price">$50</div><a href="#">
-            <div class="Wisl">Add To Cart</div></a>
-            <div class="remove">Remove</div>
-          </div>
-          
-        </div>
-        <div class="Cartitems">
-          <div class="imgb">
+      {% for wlitem in wishlist.wishlistitem_set.all %}
+      <div class="Cartitems">
+        <div class="imgb">
           <img src="./images/tp4.png"/>
-          </div>
-          <div class="itom">
-          <h1 class="Name">Olivers' Special</h1>
-          <h3 class="Description">Formal </h3>
-          
-          </div>
-          <div class="Amount">
-            <input type="number" value="1" min="1">
-          </div>
+        </div>
+        <div class="itom">
+          <h1 class="Name">{{ wlitem.product.name }}</h1>
+          <h3 class="Description">{{ wlitem.product.category.name }}</h3>
+        </div>
 
-          <div class="prices">
-            <div class="price">$50</div><a href="#">
-            <div class="Wisl">Add To Cart</div></a>
-            <div class="remove">Remove</div>
-          </div>
-          
+        <div class="prices">
+          <div class="price">{{ wlitem.product.price }}</div>
+          <a href="{% url 'store:product-details' curr_user.id wlitem.product.id %}">
+            <div class="Wisl">View Product</div>
+          </a>
+          <form action="{% url 'store:update_wishlist' curr_user.id wlitem.product.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" name="update-method" value="remove">Remove</button>
+          </form>
         </div>
-        
-        
-    
-        </div>
-    </div>
-    
+      </div>
+      {% endfor %}
+    </div>    
 {% endblock content %}

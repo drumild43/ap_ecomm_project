@@ -33,5 +33,7 @@ urlpatterns += [
 urlpatterns += [
     path('<int:user_id>/cart/', views.cart, name='cart'),
     path('<int:user_id>/cart/<int:product_id>/', views.cart, name='add-to-cart'),
-    path('<int:user_id>/cartitems/<int:cartitem_id>/', views.cart, 'update-cartitem')
+    path('<int:user_id>/cartitems/<int:cartitem_id>/', views.cart, 'update-cartitem'),
+    path('<int:user_id>/wishlist/', views.wishlist, name='wishlist'),
+    path('<int:user_id>/wishlist/<int:product_id>/', views.wishlist, name='update-wishlist')
 ]

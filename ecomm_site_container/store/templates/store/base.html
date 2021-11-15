@@ -20,14 +20,6 @@
             The Shoes Maker
           </div>
           <div class="menu">
-            <div class="top-navigation">
-              <div class="logo">
-                The Shoes Maker
-              </div>
-              <div class="close">
-                <i class="bx bx-x"></i>
-              </div>
-            </div>
             <ul class="navigation-list">
               <li>
                 <div class="searchbar">
@@ -41,21 +33,30 @@
                   </form>
                 </div>
               </li>
+              {% if curr_user %}
               <li class="navigation-item">
-                <a href="index.html" class="Navigation-link" >Home</a>
+                <a href="{% url 'store:homepage' curr_user.id %}" class="Navigation-link">Home</a>
               </li>
               <li class="navigation-item">
-                <a href="product.html" class="Navigation-link" >Products</a>
+                <a href="{% url 'store:products' curr_user.id %}" class="Navigation-link">Products</a>
+              </li>
+              {% else %}
+              <li class="navigation-item">
+                <a href="{% url 'store:anon_homepage' %}" class="Navigation-link">Home</a>
               </li>
               <li class="navigation-item">
-                <a href="#about" class="Navigation-link" >About Us</a>
+                <a href="{% url 'store:anon_products' %}" class="Navigation-link">Products</a>
+              </li>
+              {% endif %}
+              <li class="navigation-item">
+                <a href="#about" class="Navigation-link">About Us</a>
               </li>
               <li class="navigation-item">
-                <a href="#contact" class="Navigation-link" >Contact</a>
+                <a href="#contact" class="Navigation-link">Contact</a>
               </li>
               {% if curr_user %}
               <li class="navigation-item">
-                <a href="account.html" class="Navigation-link" >Hello {{ curr_user.first_name}}
+                <a href="{% url 'store:account' curr_user.id %}" class="Navigation-link">Hello {{ curr_user.first_name}}
                 </a>
               </li>
               <li class="navigation-item">
@@ -64,25 +65,20 @@
                   <button type="submit" style="margin: 0 0; padding: 1em; border: 0px">LOGOUT</button>
                 </form>
               </li>
+              <li class="navigation-item">
+                <a href="{% url 'store:cart' curr_user.id %}" class="Navigation-link"><i class="bx bx-shopping-bag"></i></a>
+                <span class='badge badge-warning' id='lblCartCount'> {{ curr_user.cart.total_quantity }} </span>
+              </li>
               {% else %}
               <li class="navigation-item">
-                <a href="signin.html" class="Navigation-link" >Login</a>
+                <a href="{% url 'store:signin' %}" class="Navigation-link" >Login</a>
+              </li>
+              <li class="navigation-item">
+                <a href="{% url 'store:signin' %}" class="Navigation-link" ><i class="bx bx-shopping-bag"></i></a>
+                <span class='badge badge-warning' id='lblCartCount'> 0 </span>
               </li>
               {% endif %}
-              <li class="navigation-item">
-                <a href="Cart.html" class="Navigation-link" ><i class="bx bx-shopping-bag"></i></a>
-                <span class='badge badge-warning' id='lblCartCount'> 0 </span>
-  
-              </li>
             </ul>
-          </div>
-          <a href="cart.html" class="cart-icon">
-            <i class="bx bx-shopping-bag"></i>
-            <span class='badge badge-warning' id='lblCartCount'> 0 </span>
-          </a>
-  
-          <div class="hamburger">
-            <i class="bx bx-menu"></i>
           </div>
         </div>
       </nav>
