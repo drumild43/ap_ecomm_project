@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import EcomUser, Cart, CartItem, Product
+from .models import EcomUser, Cart, CartItem, Product, Wishlist
 
 def home(request, user_id=None):
     if user_id:
@@ -31,6 +31,7 @@ def signup(request, product_id=None):
         # else, create new user if passwords match
         elif password1 == password2:
             new_cart = Cart()
+            new_wishlist = Wishlist()
 
             new_user = EcomUser(
                 first_name=first_name, 
@@ -38,9 +39,11 @@ def signup(request, product_id=None):
                 email=email, 
                 address=address,
                 cart = new_cart,
+                wishlist = new_wishlist,
                 logged_in = True
             )
             new_cart.save()
+            new_wishlist.save()
             new_user.set_password(password1)
             new_user.save()
 

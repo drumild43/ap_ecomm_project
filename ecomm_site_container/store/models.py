@@ -21,7 +21,8 @@ class Category(models.Model):
 class EcomUserManager(BaseUserManager):
     def create_user(self, email, password=None):
         cart = Cart()
-        user = self.model(email=self.normalize_email(email), cart = cart)
+        wishlist = Wishlist()
+        user = self.model(email=self.normalize_email(email), cart=cart, wishlist=wishlist)
         cart.save()
         user.set_password(password)
         user.save(using=self._db)
@@ -38,7 +39,8 @@ class EcomUser(AbstractBaseUser):
     last_name = models.CharField(max_length=150, blank=True)
     email = models.EmailField(unique=True)
     address = models.TextField(blank=True)
-    cart = models.OneToOneField('Cart', on_delete=models.SET_NULL, null=True)
+    cart = models.OneToOneField('Cart', on_delete=models.SET_NULL, null=True, blank=True)
+    wishlist = models.OneToOneField('Wishlist', on_delete=models.DO_NOTHING, blank=True)
     logged_in = models.BooleanField(default=False)
 
     is_admin = models.BooleanField(default=False)
@@ -68,6 +70,13 @@ class CartItem(models.Model):
     quantity = models.PositiveSmallIntegerField(default=0)
     size = models.PositiveSmallIntegerField(null=True)
 
+class Wishlist(models.Model):
+    pass
+
+class WishlistItem(models.Model):
+    wishlist = models.ForeignKey(Wishlist, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
 class Order(models.Model):
     ordered_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(EcomUser, on_delete=models.CASCADE)
@@ -90,10 +99,9 @@ class OrderItem(models.Model):
     quantity = models.PositiveSmallIntegerField()
     size = models.PositiveSmallIntegerField(null=True)
 
-"""
 class Review(models.Model):
-    pass
-
-class Rating(models.Model):
-    pass
-"""
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(EcomUser, on_delete=models.CASCADE)
+    review_text = models.TextField()
+    is_verified_buyer = models.BooleanField()
+    rating = models.PositiveSmallIntegerField()
