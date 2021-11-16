@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import EcomUser, Cart, CartItem, Product, Wishlist, WishlistItem
+from .models import EcomUser, Cart, CartItem, Order, OrderItem, Product, Wishlist, WishlistItem
 
 def home(request, user_id=None):
     if user_id:
@@ -402,3 +402,38 @@ def wishlist(request, user_id, product_id=None):
             WishlistItem.objects.filter(wishlist__pk=wishlist.id).delete()
 
         return HttpResponseRedirect(reverse('store:wishlist', args=(user_id,)))
+
+def checkout(request, user_id):
+    curr_user = EcomUser.objects.get(pk=user_id)
+    cart = curr_user.cart
+
+    cart_subtotal = 0
+    for cartitem in cart.cartitem_set.all():
+        cart_subtotal += cartitem.quantity * (cartitem.product.price)
+
+    if request.method == 'GET':
+        context = {'curr_user': curr_user, 'cart': cart, 'cart_subtotal': cart_subtotal}
+        return render(request, 'store/checkout.html', context=context)
+
+    if request.method == 'POST':
+        # create order
+        order = Order(user=curr_user, order_total=cart_subtotal)
+        order.save()
+
+        # add orderitems and remove corresponding cartitems
+        for cartitem in cart.cartitem_set.all():
+            orderitem = OrderItem(
+                order=order,
+                product=cartitem.product,
+                quantity=cartitem.quantity,
+                size=cartitem.size
+            )
+            orderitem.save()
+            cartitem.delete()
+
+        cart.total_quantity = 0
+        return HttpResponseRedirect(reverse('store:pay-suc', args=(user_id,)))
+
+def pay_suc(request, user_id):
+    curr_user = EcomUser.objects.get(pk=user_id)
+    return render(request, 'store/paysuc.html', context={'curr_user': curr_user})

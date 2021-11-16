@@ -78,8 +78,9 @@ class WishlistItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
 class Order(models.Model):
-    ordered_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(EcomUser, on_delete=models.CASCADE)
+    ordered_on = models.DateTimeField(auto_now_add=True)
+    order_total = models.PositiveIntegerField()
 
     CONFIRMED = 'C'
     TRANSIT = 'T'
@@ -91,7 +92,7 @@ class Order(models.Model):
         (DELIVERED, 'Delivered'),
         (CANCELLED, 'Cancelled')
     ]
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=CONFIRMED)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=CONFIRMED)
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)

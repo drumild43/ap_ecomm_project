@@ -15,20 +15,19 @@
 
     <div class="logo">
         <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
-       
-            The Shoes Maker
-        </div>
-        
+        The Shoes Maker
     </div>
+        
     <div class="pger">
     <form > 
         <div class="tit">
-        <h1>
-        Your Payment is Successfull </h1>
+            <h1>Payment Successful!</h1>
+            <h2>Your order has been confirmed and will be delivered soon</h2>
         </div>
         
-           
-            <button type="submit" name="signup-button" value="sign up"> <a href="index.html">Continue Shopping</a></button>
+        <button type="submit">
+            <a href="{% url 'store:products' curr_user.id %}">Continue Shopping</a>
+        </button>
           
     </form> 
 </div>  

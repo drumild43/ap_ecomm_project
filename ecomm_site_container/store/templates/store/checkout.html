@@ -1,48 +1,47 @@
 {% extends "store/base.html" %}
 {% load static %}
 {% block content %}
-<div class="Cart-Container">
+  <div class="Cart-Container">
     <div class="Cartitems">
-        <div class="imgb">
-        <img src="./images/tp4.png"/>
-        </div>
-        <div class="itom">
-        <h1 class="Name">Olivers' Special</h1>
-        <h3 class="Description">Formal </h3>
-        
-        </div>
-        <div class="Amount">
-          12
-        </div>
+      <div class="Checkout-table">
+        <table>
+          <div class="ct">PAYMENT</div>
+          <tr>
+            <td>Subtotal</td>
+            <td>{{ cart_subtotal }}</td>
+          </tr>
+                
+          <tr>
+            <td>Items</td>
+            <td>{{ cart.total_quantity }}</td>
+          </tr>
 
-        <div class="Checkout-table">
-            <table>
-                <div class="ct">PAYMENT</div>
-                <tr>
-                    <td>
-                        Card Type<br/>
-                        <img src="./images/card.png">
-                    </td>
-                    </tr>
-                    <tr>
-                    
-                    
-                    Via UPI<br/>
-                    <input class="card_input" type="text" name="alt" placeholder="Enter Card Number">
-                    <input class="card_input_cvv" type="text" name="alt" placeholder="Enter CVV">
-                </tr>
-                <tr>
-                <td>Subtotal</td>
-                  <td>$200</td>
-                </tr>
-                <tr>
-                  <td>Items</td>
-                  <td>3</td>
-                </tr>
-              </table>
-              <a href="paysuc.html" class="Place-button">Place Order</a>
-        </div>
-        
+          <tr>
+            Enter Card Details
+          </tr>
+          
+          <tr>
+            <td>
+              Accepted Cards
+              <br/>
+              <img src="./images/card.png">
+            </td>
+          </tr>
+          
+          <tr>
+            <input class="card_input" type="text" name="alt" placeholder="Full Name" required>
+          </tr>
+          <tr>
+            <input class="card_input" type="text" name="alt" placeholder="Card Number" required>
+            <input class="card_input_cvv" type="text" name="alt" placeholder="CVV" required>
+          </tr>
+
+        </table>
+              
+        <form action="{% url 'checkout' curr_user.id %}" method="post">
+          <button type="submit" class="Place-button">Place Order</button>
+        </form>
       </div>
-</div>
+    </div>
+  </div>
 {% endblock content %}    
