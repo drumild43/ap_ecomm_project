@@ -81,6 +81,7 @@ class Order(models.Model):
     user = models.ForeignKey(EcomUser, on_delete=models.CASCADE)
     ordered_on = models.DateTimeField(auto_now_add=True)
     order_total = models.PositiveIntegerField()
+    total_quantity = models.PositiveIntegerField()
 
     CONFIRMED = 'C'
     TRANSIT = 'T'

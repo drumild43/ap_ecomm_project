@@ -15,6 +15,7 @@ urlpatterns = [
 # profile
 urlpatterns += [
     path('<int:user_id>/account/', views.account, name='account'),
+    path('<int:user_id>/can-order/<int:order_id>/', views.cancel_order, name='cancel-order'),
     path('<int:user_id>/address/', views.address, name='address'),
     path('<int:user_id>/personal-details/', views.pers_details, name='pers-details')
 ]

@@ -70,9 +70,11 @@
           </tr>
         </table>
         
+        {% if cart.total_quantity != 0 %}
         <a href="{% url 'store:checkout' curr_user.id %}" class="check-button" style="width: 27%; height: fit-content; font-size: 1.5rem; margin: 0.7rem 2rem; padding: 0.5rem;">
           Proceed To Checkout
         </a>
+        {% endif %}
       </div>
     </div>
     

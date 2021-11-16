@@ -417,7 +417,11 @@ def checkout(request, user_id):
 
     if request.method == 'POST':
         # create order
-        order = Order(user=curr_user, order_total=cart_subtotal)
+        order = Order(
+            user=curr_user, 
+            order_total=cart_subtotal, 
+            total_quantity=cart.total_quantity
+        )
         order.save()
 
         # add orderitems and remove corresponding cartitems
@@ -437,3 +441,10 @@ def checkout(request, user_id):
 def pay_suc(request, user_id):
     curr_user = EcomUser.objects.get(pk=user_id)
     return render(request, 'store/paysuc.html', context={'curr_user': curr_user})
+
+def cancel_order(request, user_id, order_id):
+    if request.method == 'POST':
+        order = Order.objects.get(pk=order_id)
+        order.status = 'X'
+        
+        return HttpResponseRedirect(reverse('store:account', args=(user_id,)))

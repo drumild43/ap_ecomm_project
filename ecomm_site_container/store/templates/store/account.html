@@ -1,94 +1,159 @@
 {% extends "store/base.html" %}
 {% load static %}
 {% block content %}
-    <div class="your-order">
-      <h1>Your Orders</h1>
-      <div class="Cart-Container">
-      <div class="Cartitems">
-        <div class="imgb">
-        <img src="{% static 'store/images/tp4.png' %}"/>
-        </div>
-        <div class="itom">
-        <h1 class="Name">Olivers' Special</h1>
-        <h3 class="Description">Formal </h3>
-        
-        </div>
-        <div class="Amount">
-          2
-        </div>
 
-        <div class="prices">
-          <div class="status">On its way</div>
-          
-        </div>
-        
-      </div>
-    </div>
-    </div>
-
-    <center>
+<center>
+  <table>
+    <tr>
+      <td style="width: fit-content;">
+        <a href="{% url 'store:wishlist' curr_user.id %}">
+          <center>
+            <button type="button" style="font-size: 2.5rem; width: 30rem; padding: 2rem 4.5rem; margin-right: 2rem;">
+              Wishlist 
+            </button>
+          </center>
+        </a>
+      </td>
+      <td>
+        <a href="{% url 'store:cart' curr_user.id %}">
+          <center>
+            <button type="button" style="font-size: 2.5rem; width: 30rem; padding: 2rem 4.5rem; margin-left: 2rem;">
+              Cart 
+            </button>
+          </center>
+        </a>
+      </td>
+  </tr>
+</table>
+</center>
+<br>
+<div class="personal-info">
+  <div class="prdt-box">
+    <div class="content">
       <table>
         <tr>
           <td>
-            <a href="wishlist.html">
-              <center>
-                <button type="" name="Update-address" value="Update">
-                  Wishlist 
-                </button>
-              </center>
-            </a>
+            <h2>Update Personal Info</h2>
+          </td>
+          
+          <td style="padding-bottom: 1em; padding-left: 4rem;">
+            <h2>Your Address:-</h2>
+            <div style="margin-left: 10rem; width: 80%;">
+              <div style="text-align: center; color: white;">
+                {{ curr_user.address|linebreaks }}
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="but-update">
+              <form action="{% url 'store:pers-details' curr_user.id %}" method="get" style="padding: 0px; margin-left: 2rem;">
+                <button type="submit" style="margin: 0; font-size: 1.1rem;">Update Info</button>
+              </form>
+            </div>
           </td>
           <td>
-            <a href="cart.html">
-              <center>
-                <button type="" name="Update-address" value="Update">
-                  Your Cart 
-                </button>
-              </center>
-            </a>
+            <div class="but-update">
+              <form action="{% url 'store:address' curr_user.id %}" method="get" style="padding: 0px; margin-left: 8rem;">
+                <button type="submit" style="margin: 0; border: 0px; font-size: 1.1rem;">Update Address</button>
+              </form>
+            </div>
           </td>
-      </tr>
+        </tr>
+      </table>
+    </div>        
+  </div>      
+</div>
+
+<div class="your-order">
+  <h1>Your Orders</h1>
+  {% for order in curr_user.order_set.all %}
+  <div class="order-header">
+    <table>
+      <tbody>
+        <tr>
+          <td><h2>Order #{{ order.id }}</h2></td>
+          <td><h2 style="text-align: right;">Status: {{ order.get_status_display }}</h2></td>
+        </tr>
+  
+        <tr>
+          <td><h3 style="text-align: center;">{{ order.total_quantity }} items</h3></td>
+          <td><h3 style="text-align: center;">Placed on: {{ order.ordered_on }}</h3></td>
+          <td><h3 style="text-align: center;">Order Amount: {{ order.order_total }}</h3></td>
+        </tr>
+
+        {% if order.status == 'C' or order.status == 'T' %}
+        <tr>
+          <form action="{% url 'store:cancel-order' curr_user.id order.id %}" method="post">
+            <button type="submit">Cancel order</button>
+          </form>
+        </tr>
+  
+      </tbody>
     </table>
-  </center>
-  <br>
-    <div class="personal-info">
-      <div class="prdt-box">
-        <div class="content">
-          <table>
-            <tr>
-              <td>
-                <h2>Update Personal Info</h2>
-              </td>
-              
-              <td style="padding-bottom: 1em; padding-left: 4rem;">
-                <h2>Your Address:-</h2>
-                <div style="margin-left: 10rem; width: 80%;">
-                  <div style="text-align: center; color: white;">
-                    {{ curr_user.address|linebreaks }}
-                  </div>
-                </div>
-              </td>
-            </tr>
+  </div>
 
-            <tr>
-              <td>
-                <div class="but-update">
-                  <form action="{% url 'store:pers-details' curr_user.id %}" method="get" style="padding: 0px; margin-left: 2rem;">
-                    <button type="submit" style="margin: 0; font-size: 1.1rem;">Update Info</button>
-                  </form>
-                </div>
-              </td>
-              <td>
-                <div class="but-update">
-                  <form action="{% url 'store:address' curr_user.id %}" method="get" style="padding: 0px; margin-left: 8rem;">
-                    <button type="submit" style="margin: 0; border: 0px; font-size: 1.1rem;">Update Address</button>
-                  </form>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>        
-      </div>      
+  {% for orderitem in order.orderitem_set.all %}
+  <div class="Cart-Container">
+    <div class="Cartitems">
+      <div class="imgb">
+        <img src="{% static 'store/images/tp4.png' %}"/>
+      </div>
+      <div class="itom">
+        <h1 class="Name">{{ orderitem.product.name }}</h1>
+        <h3 class="Description">{{ orderitem.product.category.name }}</h3>
+      </div>
+      
+      <div class="Amount">{{ orderitem.quantity }}</div>
     </div>
+  </div>
+  {% endfor %}
 
-   {% endblock content %}
+  {% empty %}
+  <h2>You have no orders yet.</h2>
+  
+  {% endfor %}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="Cart-Container">
+    <div class="Cartitems">
+      <div class="imgb">
+        <img src="{% static 'store/images/tp4.png' %}"/>
+      </div>
+      <div class="itom">
+        <h1 class="Name">Olivers' Special</h1>
+        <h3 class="Description">Formal </h3>
+      </div>
+      
+      <div class="Amount">2</div>
+      
+      <div class="prices">
+        <div class="status">On its way</div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+{% endblock content %}
