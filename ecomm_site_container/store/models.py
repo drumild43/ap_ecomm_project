@@ -1,5 +1,9 @@
+import datetime
+
 from django.db import models
+from django.db.models import Avg, Count
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone
 
 class Product(models.Model):
     name = models.CharField(max_length=250)
@@ -11,9 +15,24 @@ class Product(models.Model):
     def get_img_name(self):
         return "img" + str(self.id)
     """
-    # avg_rating
-    # ^^ average of user ratings; probably computed instead of related to ratings model
-    # review_count
+
+    def get_avg_rating(self):
+        avg_rating = Review.objects.filter(
+                product__pk=self.id
+            ).aggregate(
+                Avg('rating')
+            )['rating__avg']
+
+        return avg_rating
+    
+    def get_review_count(self):
+        review_count = Product.objects.filter(
+                pk=self.id
+            ).annotate(
+                Count('review')
+            )[0].review__count
+
+        return review_count
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -95,6 +114,22 @@ class Order(models.Model):
     ]
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=CONFIRMED)
 
+    def get_updated_status(self):
+        # if order not cancelled or delivered, update status according to order time
+        if self.status != 'X' or self.status != 'D':
+            time_passed = timezone.now() - self.ordered_on
+            
+            if time_passed < datetime.timedelta(minutes=30):
+                self.status = 'C'
+
+            elif time_passed < datetime.timedelta(minutes=60):
+                self.status = 'T'
+
+            else:
+                self.status = 'D'
+
+        return self.status
+
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
@@ -105,5 +140,16 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(EcomUser, on_delete=models.CASCADE)
     review_text = models.TextField()
-    is_verified_buyer = models.BooleanField()
     rating = models.PositiveSmallIntegerField()
+
+    def is_by_verified_buyer(self):
+        # list of user's orders with given product
+        orders = Order.objects.filter(
+            user__pk=self.user.id, 
+            orderitem__product__pk=self.product.id
+        )
+
+        for order in orders:
+            # buyer verified if there is a delivered order with given product
+            if order.get_updated_status() == 'D':
+                return True

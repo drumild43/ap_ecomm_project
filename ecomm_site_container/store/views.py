@@ -1,8 +1,9 @@
+from django.db.models import Avg, Count
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import EcomUser, Cart, CartItem, Order, OrderItem, Product, Wishlist, WishlistItem
+from .models import EcomUser, Cart, CartItem, Order, OrderItem, Product, Review, Wishlist, WishlistItem
 
 def home(request, user_id=None):
     if user_id:
@@ -266,14 +267,43 @@ def products(request):
     return render(request, 'store/product.html', context)
 
 def product_details(request, product_id, user_id=None):
-    product = Product.objects.get(id = product_id)
-    context = {'product': product}
+    if request.method == 'GET':
+        product = Product.objects.get(id = product_id)
+        context = {'product': product}
 
-    if user_id:
-        curr_user = EcomUser.objects.get(pk=user_id)
-        context['curr_user'] = curr_user
+        if user_id:
+            curr_user = EcomUser.objects.get(pk=user_id)
+            context['curr_user'] = curr_user
 
-    return render(request, 'store/product-details.html', context)
+        return render(request, 'store/product-details.html', context=context)
+
+def review(request, user_id, product_id):
+    if request.method == 'POST':
+        review_text = request.POST['review-text']
+        rating = int(request.POST['rating'])
+
+        review_list = list(Review.objects.filter(
+            user__pk=user_id,
+            product__pk=product_id
+        ))
+
+        # if review already exists
+        if review_list:
+            review = review_list[0]
+            review.review_text = review_text
+            review.rating = rating
+
+        # if review does not exist, create new review
+        else:
+            review = Review(
+                product=Product.objects.get(pk=product_id),
+                user=EcomUser.objects.get(pk=user_id),
+                review_text=review_text,
+                rating=rating
+            )
+
+        review.save()
+        return HttpResponseRedirect(reverse('store:product-details', args=(user_id, product_id)))
 
 def cart(request, user_id, product_id=None, cartitem_id=None):
     curr_user = EcomUser.objects.get(pk=user_id)

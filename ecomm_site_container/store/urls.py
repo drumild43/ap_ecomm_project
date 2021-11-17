@@ -27,7 +27,8 @@ urlpatterns += [
     path('products/<int:product_id>/', views.product_details, name='anon_product-details'),
     path('<int:user_id>/products/<int:product_id>/', views.product_details, name='product-details'),
     path('products/<int:product_id>/signup/', views.signup, name='product-signup-redirect'),
-    path('products/<int:product_id>/signin/', views.signin, name='product-signin-redirect')
+    path('products/<int:product_id>/signin/', views.signin, name='product-signin-redirect'),
+    path('<int:user_id>/submit-review/<int:product_id>/', views.review, name='review')
 ]
 
 # cart, wishlist, checkout
