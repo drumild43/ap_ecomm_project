@@ -11,9 +11,12 @@ class Product(models.Model):
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
     price = models.PositiveIntegerField()
 
+    def __str__(self):
+        return self.name
+
     """
     def get_img_name(self):
-        return "img" + str(self.id)
+        return self.name + ".jpg"
     """
 
     def get_avg_rating(self):
@@ -37,12 +40,16 @@ class Product(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 class EcomUserManager(BaseUserManager):
     def create_user(self, email, password=None):
         cart = Cart()
         wishlist = Wishlist()
         user = self.model(email=self.normalize_email(email), cart=cart, wishlist=wishlist)
         cart.save()
+        wishlist.save()
         user.set_password(password)
         user.save(using=self._db)
         return user

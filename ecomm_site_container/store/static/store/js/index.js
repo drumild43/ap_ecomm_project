@@ -1,8 +1,18 @@
 let searcharray = [
-    'Asian Future-01','Bourge ','Campus', 'Furo', 'Furios-89', 'Hravso Grsk', 'Lancer ',
-     'Nivia Verdict', 'Reebok Revolution', 'Sparx Sx0414g', 'Bacca Bucci', 'Cebtrio', 
-    
-  
+    "ASIAN Future-01", "ASIAN Wonder-13", "Hravso GRSK", "Neeman's Classics",
+    "Lancer Hydra-46", "Converse Basics", "Knoos Reed", "Krasa Neo", "Flite Form",
+    "NIVIA Verdict", "Reebok Revolution", "SPARX 414","Symbol Nexus", 
+    "Bacca Bucci Steel", "Cebtrio Woods", "Neeman's Slipons", "Puma Starlight",
+    "Redchief Woodland", "Red Tape Basics", "Reebok Reetek", "Rook Basics",
+    "SPARX 323", "SPARX 402", "Adidas Addilet", "Benneton Evo", "Big Fox FTS",
+    "Des Tongs", "Doctor Extras", "Flite FL", "Flite SC", "Perry Pao", "Zappy M1",
+    "Soulthreads Freeway", "Zerol Clogs", "Big Fox BFS", "Sparx SF0", "Bata Scale",
+    "Bata Edgar", "Alberto Toressi J", "Alberto Torresi K", "Bata Alfred",
+    "Stylure Pog", "Red Tape Nine", "Red Tape 91", "Mactree K10", "Bata Lace",
+    "Bata SA05", "Centrino Original", "Centrino M", "Shoemate Slides",
+    "Bourge Loire-z126", "Campus Gilbert", "Campus Oxyfit", "Campus Rodeo-2",
+    "Campus S-Cross", "Campus Stonic", "Redchief FURO-5", "Redchief FURO-4",
+    "Redchief FURO-7"
   ];
   
   const searchInput = document.getElementById('inputbar');
