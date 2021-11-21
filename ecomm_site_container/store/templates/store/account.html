@@ -90,6 +90,7 @@
             <button type="submit">Cancel order</button>
           </form>
         </tr>
+        {% endif %}
   
       </tbody>
     </table>
@@ -99,10 +100,14 @@
   <div class="Cart-Container">
     <div class="Cartitems">
       <div class="imgb">
-        <img src="{% static 'store/images/tp4.png' %}"/>
+        <a href="{% url 'store:product-details' curr_user.id orderitem.product.id %}">
+          <img src="{% static orderitem.product.get_img_name %}"/>
+        </a>
       </div>
       <div class="itom">
-        <h1 class="Name">{{ orderitem.product.name }}</h1>
+        <a href="{% url 'store:product-details' curr_user.id orderitem.product.id %}">
+          <h1 class="Name">{{ orderitem.product.name }}</h1>
+        </a>
         <h3 class="Description">{{ orderitem.product.category.name }}</h3>
       </div>
       

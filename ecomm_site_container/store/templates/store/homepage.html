@@ -17,8 +17,14 @@
       <nav class="navigation">
         <div class="navigation container">
           <div class="logo">
-            <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
-            The Shoes Maker
+            {% if curr_user %}
+            <a href="{% url 'store:homepage' curr_user.id %}">
+            {% else %}
+            <a href="{% url 'store:anon_homepage' %}">
+            {% endif %}
+              <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
+              The Shoes Maker
+            </a>
           </div>
           <div class="menu">
             <div class="top-navigation">
@@ -29,8 +35,8 @@
                 <i class="bx bx-x"></i>
               </div>
             </div>
-            <ul class="navigation-list">
 
+            <ul class="navigation-list">
               <li>
                 {% if curr_user %}
                 <form action="{% url 'store:products' curr_user.id %}" method="get">
@@ -47,47 +53,60 @@
                 </form>
               </li>
 
+              {% if curr_user %}
               <li class="navigation-item">
-                <a href="#" class="Navigation-link" >Home</a>
+                <a href="{% url 'store:homepage' curr_user.id %}" class="Navigation-link">Home</a>
+              </li>
+              
+              <li class="navigation-item">
+                <a href="{% url 'store:products' curr_user.id %}" class="Navigation-link">Products</a>
+              </li>
+              
+              {% else %}
+              <li class="navigation-item">
+                <a href="{% url 'store:anon_homepage' %}" class="Navigation-link">Home</a>
               </li>
               <li class="navigation-item">
-                <a href="signin.html" class="Navigation-link" >Products</a>
+                <a href="{% url 'store:anon_products' %}" class="Navigation-link">Products</a>
               </li>
+              {% endif %}
+
               <li class="navigation-item">
                 <a href="signin.html" class="Navigation-link" >About Us</a>
               </li>
               <li class="navigation-item">
                 <a href="signin.html" class="Navigation-link" >Contact</a>
               </li>
+
               {% if curr_user %}
               <li class="navigation-item">
-                <a href="account.html" class="Navigation-link" >Hello {{ curr_user.first_name}}
+                <a href="{% url 'store:account' curr_user.id %}" class="Navigation-link">Hello {{ curr_user.first_name}}
                 </a>
               </li>
+              
               <li class="navigation-item">
                 <form action="{% url 'store:logout' curr_user.id %}" method="post" style="padding: 0px;">
                   {% csrf_token %}
                   <button type="submit" style="margin: 0 0; padding: 1em; border: 0px">LOGOUT</button>
                 </form>
               </li>
+
+              <li class="navigation-item">
+                <a href="{% url 'store:cart' curr_user.id %}" class="Navigation-link"><i class="bx bx-shopping-bag"></i></a>
+                <span class='badge badge-warning' id='lblCartCount'> {{ curr_user.cart.total_quantity }} </span>
+              </li>
+
               {% else %}
               <li class="navigation-item">
-                <a href="signin.html" class="Navigation-link" >Login</a>
+                <a href="{% url 'store:signin' %}" class="Navigation-link" >Login</a>
+              </li>
+              
+              <li class="navigation-item">
+                <a href="{% url 'store:signin' %}" class="Navigation-link" ><i class="bx bx-shopping-bag"></i></a>
+                <span class='badge badge-warning' id='lblCartCount'> 0 </span>
               </li>
               {% endif %}
-              <li class="navigation-item">
-                <a href="signin.html" class="Navigation-link" ><i class="bx bx-shopping-bag"></i>
-                <span class='badge badge-warning' id='lblCartCount'> 0 </span></a>
-              </li>
             </ul>
-          </div>
-          <a href="signin.html" class="cart-icon">
-            <i class="bx bx-shopping-bag"></i>
-            <span class='badge badge-warning' id='lblCartCount'> 0 </span>
-          </a>
-  
-          <div class="hamburger">
-            <i class="bx bx-menu"></i>
           </div>
         </div>
       </nav>
@@ -95,12 +114,16 @@
       
       <img src="{% static 'store/images/hm2.png' %}" alt="" class="gimg" height=50% width=50%/>
       <div class="img-content">
-        <h2><span class="discount">70% </span> SALE OFF</h2>
+        <h2><span class="discount">30% </span> OFF</h2>
         <h1>
-          <span>Goofy Vibes</span>
-          <span class="red">Mode On!!!</span>
+          <span>Sale</span>
+          <span class="red">On!</span>
         </h1>
-        <a class="box"  href="#grlcth">shop now</a>
+        {% if curr_user %}
+        <a class="box" href="{% url 'store:products' curr_user.id %}">Shop Now</a>
+        {% else %}
+        <a class="box" href="{% url 'store:anon_products' %}">Shop Now</a>
+        {% endif %}
       </div>
 
     </header>
@@ -111,113 +134,115 @@
         <div class="prdt-container">
           <div class="prdt-box">
             <div class="content">
-              <a href="signin.html" class="href">
-                <h2>
-                  
-                    Sports' Shoes
-                  
-                </h2>
-                <h4 class="quote">
-                  Live the Game!!!
-                </h4>
-              
+              {% if curr_user %}
+              <a href="{% url 'store:products' curr_user.id %}" class="href">
+              {% else %}
+              <a href="{% url 'store:anon_products' %}" class="href">
+              {% endif %}
+                <h2>Sports Shoes</h2>
+                <h4 class="quote">Live the Game!!!</h4>
+
+                <img src="{% static 'store/images/tp1.png' %}" alt="">
+              </a>
             </div>
-            <img  src="{% static 'store/images/tp1.png' %}" alt="">
-          </a>
           </div>
+
           <div class="prdt-box">
             <div class="content">
-              <a href="signin.html" class="href">
-                <h2>
-                  Casual Shoes
-                </h2>
-                <h4 class="quote">
-                  Wear the Trend!!!
-                </h4>
-              
+              {% if curr_user %}
+              <a href="{% url 'store:products' curr_user.id %}" class="href">
+              {% else %}
+              <a href="{% url 'store:anon_products' %}" class="href">
+              {% endif %}
+                <h2>Casual Shoes</h2>
+                <h4 class="quote">Wear the Trend!!!</h4>
+
+                <img src="{% static 'store/images/tp2.png' %}" alt="">
+              </a>
             </div>
-            <img  src="{% static 'store/images/tp2.png' %}" alt="">
-          </a>
           </div>
+
           <div class="prdt-box">
             <div class="content">
-              <a href="signin.html" class="href">
-                <h2>
-                  Flip Flops / Chappals
-                </h2>
-                <h4 class="quote">
-                  Take a Gooffy Ride!!!
-                </h4>
-             
+              {% if curr_user %}
+              <a href="{% url 'store:products' curr_user.id %}" class="href">
+              {% else %}
+              <a href="{% url 'store:anon_products' %}" class="href">
+              {% endif %}
+                <h2>Flip Flops</h2>
+                <h4 class="quote">Take a Ride!!!</h4>
+
+                <img src="{% static 'store/images/tp3.png' %}" alt="">
+              </a>
             </div>
-            <img  src="{% static 'store/images/tp3.png' %}" alt="">
-          </a>
           </div>
+
           <div class="prdt-box">
             <div class="content">
-              <a href="signin.html" class="href">
-                <h2>
-                  Formal Shoes
-                </h2>
-                <h4 class="quote">
-                  The Gentlemen's Choice!!!
-                </h4>
-              
+              {% if curr_user %}
+              <a href="{% url 'store:products' curr_user.id %}" class="href">
+              {% else %}
+              <a href="{% url 'store:anon_products' %}" class="href">
+              {% endif %}
+                <h2>Formal Shoes</h2>
+                <h4 class="quote">The Gentlemen's Choice!!!</h4>
+
+                <img src="{% static 'store/images/tp4.png' %}" alt="">
+              </a>
             </div>
-            <img  src="{% static 'store/images/tp4.png' %}" alt="">
-          </a>
           </div>
         </div>
       </div> 
+    </section>
 
-  </section>
-  <section id="contact" class="footer">
-    <div class="foot-container">
-      <div class="footer-items">
-        <h3>
-          EXTRAS
-        </h3>
-        <a href="signin.html" >Brands</a>
-
-        <a href="signin.html">Site Map</a>
-      </div>
-      <div class="footer-items">
-        <h3>Info Center</h3>
-        <a href="#">About Us</a>
-        <a href="#" >Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
-      
-      </div>
-      <div class="footer-items">
-        <h3>
-          ACCOUNTS
-        </h3>
-        <a href="account.html">My Accounts</a>
-        <a href="account.html">Order History</a>
-        <a href="wishlist.html">Wish List</a>
-        <a href="homepage.html">Log out</a>
-      </div>
-      <div class="footer-items">
-        <h3>CONTACT US</h3>
-        <div>
-          <i class="fas fa-map-marker-alt"></i>
-          139, Kamala Nagar, Charbagh, New Delhi, India - 236545
+    <section id="contact" class="footer">
+      <div class="foot-container">
+        <div class="footer-items">
+          <h3>
+            EXTRAS
+          </h3>
+          <a href="#">Brands</a>
+  
+          <a href="#">Site Map</a>
         </div>
-        <div>
-          <i class="far fa-envelope"></i>
-          info@shoemaker.com
+        <div class="footer-items">
+          <h3>Info Center</h3>
+          <a href="#">About Us</a>
+          <a href="#" >Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        
         </div>
-        <div>
-          <i class="fas fa-phone"></i>
-          +91 75557 78964
+        {% if curr_user %}
+        <div class="footer-items">
+          <h3>
+            ACCOUNTS
+          </h3>
+          <a href="{% url 'store:account' curr_user.id %}">My Account</a>
+          <a href="{% url 'store:account' curr_user.id %}">Order History</a>
+          <a href="{% url 'store:wishlist' curr_user.id %}">Wish List</a>
         </div>
-        <div></div>
-          <i class="far fa-paper-plane"></i>
-          New Delhi, India
+        {% endif %}
+        <div class="footer-items">
+          <h3>CONTACT US</h3>
+          <div>
+            <i class="fas fa-map-marker-alt"></i>
+            139, Kamala Nagar, Charbagh, New Delhi, India - 236545
+          </div>
+          <div>
+            <i class="far fa-envelope"></i>
+            info@shoemaker.com
+          </div>
+          <div>
+            <i class="fas fa-phone"></i>
+            +91 75557 78964
+          </div>
+          <div></div>
+            <i class="far fa-paper-plane"></i>
+            New Delhi, India
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
   <script src="{% static 'store/js/index.js' %}"></script> 
   

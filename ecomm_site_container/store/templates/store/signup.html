@@ -26,12 +26,14 @@
   <body>
     <section class="signup">
       <div class="logo">
-        <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
-        The Shoes Maker
+        <a href="{% url 'store:homepage' curr_user.id %}">
+          <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
+          The Shoes Maker
+        </a>
       </div>
+      
 
       <div class="pger">
-
         {% if product_id %}
         <form action="{% url 'store:product-signup-redirect' product_id %}" method="post">
         {% else %}
@@ -71,5 +73,4 @@
       </div>
     </section>
   </body>
-
 </html>

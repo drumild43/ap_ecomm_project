@@ -16,8 +16,14 @@
       <nav class="navigation">
         <div class="navigation container">
           <div class="logo">
-            <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
-            The Shoes Maker
+            {% if curr_user %}
+            <a href="{% url 'store:homepage' curr_user.id %}">
+            {% else %}
+            <a href="{% url 'store:anon_homepage' %}">
+            {% endif %}
+              <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
+              The Shoes Maker
+            </a>
           </div>
           <div class="menu">
             <ul class="navigation-list">
@@ -36,13 +42,16 @@
                   </div>
                 </form>
               </li>
+              
               {% if curr_user %}
               <li class="navigation-item">
                 <a href="{% url 'store:homepage' curr_user.id %}" class="Navigation-link">Home</a>
               </li>
+              
               <li class="navigation-item">
                 <a href="{% url 'store:products' curr_user.id %}" class="Navigation-link">Products</a>
               </li>
+              
               {% else %}
               <li class="navigation-item">
                 <a href="{% url 'store:anon_homepage' %}" class="Navigation-link">Home</a>
@@ -51,31 +60,37 @@
                 <a href="{% url 'store:anon_products' %}" class="Navigation-link">Products</a>
               </li>
               {% endif %}
+              
               <li class="navigation-item">
-                <a href="#about" class="Navigation-link">About Us</a>
+                <a href="#" class="Navigation-link">About Us</a>
               </li>
               <li class="navigation-item">
-                <a href="#contact" class="Navigation-link">Contact</a>
+                <a href="#" class="Navigation-link">Contact</a>
               </li>
+
               {% if curr_user %}
               <li class="navigation-item">
                 <a href="{% url 'store:account' curr_user.id %}" class="Navigation-link">Hello {{ curr_user.first_name}}
                 </a>
               </li>
+              
               <li class="navigation-item">
                 <form action="{% url 'store:logout' curr_user.id %}" method="post" style="padding: 0px;">
                   {% csrf_token %}
                   <button type="submit" style="margin: 0 0; padding: 1em; border: 0px">LOGOUT</button>
                 </form>
               </li>
+
               <li class="navigation-item">
                 <a href="{% url 'store:cart' curr_user.id %}" class="Navigation-link"><i class="bx bx-shopping-bag"></i></a>
                 <span class='badge badge-warning' id='lblCartCount'> {{ curr_user.cart.total_quantity }} </span>
               </li>
+
               {% else %}
               <li class="navigation-item">
                 <a href="{% url 'store:signin' %}" class="Navigation-link" >Login</a>
               </li>
+              
               <li class="navigation-item">
                 <a href="{% url 'store:signin' %}" class="Navigation-link" ><i class="bx bx-shopping-bag"></i></a>
                 <span class='badge badge-warning' id='lblCartCount'> 0 </span>
@@ -95,9 +110,9 @@
             <h3>
               EXTRAS
             </h3>
-            <a href="brand.html" >Brands</a>
+            <a href="#">Brands</a>
     
-            <a href="index.html">Site Map</a>
+            <a href="#">Site Map</a>
           </div>
           <div class="footer-items">
             <h3>Info Center</h3>
@@ -106,15 +121,16 @@
             <a href="#">Terms & Conditions</a>
           
           </div>
+          {% if curr_user %}
           <div class="footer-items">
             <h3>
               ACCOUNTS
             </h3>
-            <a href="account.html">My Accounts</a>
-            <a href="account.html">Order History</a>
-            <a href="wishlist.html">Wish List</a>
-            <a href="homepage.html">Log out</a>
+            <a href="{% url 'store:account' curr_user.id %}">My Account</a>
+            <a href="{% url 'store:account' curr_user.id %}">Order History</a>
+            <a href="{% url 'store:wishlist' curr_user.id %}">Wish List</a>
           </div>
+          {% endif %}
           <div class="footer-items">
             <h3>CONTACT US</h3>
             <div>

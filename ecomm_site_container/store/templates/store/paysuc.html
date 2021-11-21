@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-  <link rel="stylesheet" href="{% static 'store/css/styles.css %}" />
-  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-  
-  <title>TSM</title>
-  </head>
-  <body>
-
-<section class="signup">
-
-
-    <div class="logo">
-        <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
-        The Shoes Maker
-    </div>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+        <link rel="stylesheet" href="{% static 'store/css/styles.css %}" />
+        <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         
-    <div class="pger">
-    <form>
-        <div class="tit">
-            <h1>Payment Successful!</h1>
-            <h2>Your order has been confirmed and will be delivered soon</h2>
-        </div>
-        
-        <button type="submit">
-            <a href="{% url 'store:products' curr_user.id %}">Continue Shopping</a>
-        </button>
-    </form> 
-</div>  
-    </section>
+        <title>TSM</title>
+    </head>
+    
+    <body>
+        <section class="signup">
+            <div class="logo">
+                <a href="{% url 'store:homepage' curr_user.id %}">
+                <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
+                The Shoes Maker
+                </a>
+            </div>
+                
+            <div class="pger">
+                <form>
+                    <div class="tit">
+                        <h1>Payment Successful!</h1>
+                        <h2>Your order has been confirmed and will be delivered soon</h2>
+                    </div>
+                    
+                    <button type="submit">
+                        <a href="{% url 'store:products' curr_user.id %}">Continue Shopping</a>
+                    </button>
+                </form>
+            </div>  
+        </section>
     </body>
 </html>

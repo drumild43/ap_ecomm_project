@@ -6,7 +6,7 @@
       <div class="details container-md">
         <div class="left">
           <div class="main">
-            <img src="./images/-rook.jpg" alt="">
+            <img src="{% static product.get_img_name %}" alt="">
           </div>
         </div>
         <div class="right">
@@ -113,36 +113,6 @@
                 {% if not curr_user %}
                 <li><h4>Sign in to leave a review!</h4></li>
                 {% endif %}
-                
-                
-                
-                <li>
-                  <img src="./images/rw1.jpg">
-                  <div class="name">
-                    <h4>Meena Sehgal</h4>
-                  </div>
-                  <div class="rating">
-                    <i class="bx bxs-star fa-xs"></i>
-                    <i class="bx bxs-star fa-xs"></i>
-                    <i class="bx bxs-star fa-xs"></i>
-                    <i class="bx bx-star fa-xs"></i>
-                    <i class="bx bx-star fa-xs"></i>
-                  </div>
-                </li>
-                <li>
-                  <img src="./images/rw2.jpg">
-                  <div class="name">
-                    <h4>Manisha Bagchi</h4>
-                  </div>
-                  <div class="rating">
-                    <i class="bx bxs-star fa-xs"></i>
-                    <i class="bx bxs-star fa-xs"></i>
-                    <i class="bx bxs-star fa-xs"></i>
-                    <i class="bx bxs-star fa-xs"></i>
-                    <i class="bx bx-star fa-xs"></i>
-                  </div>
-                </li>
-
               </ul>
             </div>
         </div>

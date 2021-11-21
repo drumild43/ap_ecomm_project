@@ -16,10 +16,14 @@
       {% for wlitem in wishlist.wishlistitem_set.all %}
       <div class="Cartitems">
         <div class="imgb">
-          <img src="./images/tp4.png"/>
+          <a href="{% url 'store:product-details' curr_user.id wlitem.product.id %}">
+            <img src="{% static wlitem.product.get_img_name %}"/>
+          </a>
         </div>
         <div class="itom">
-          <h1 class="Name">{{ wlitem.product.name }}</h1>
+          <a href="{% url 'store:product-details' curr_user.id wlitem.product.id %}">
+            <h1 class="Name">{{ wlitem.product.name }}</h1>
+          </a>
           <h3 class="Description">{{ wlitem.product.category.name }}</h3>
         </div>
 

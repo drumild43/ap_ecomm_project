@@ -14,10 +14,8 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    """
     def get_img_name(self):
-        return self.name + ".jpg"
-    """
+        return "store/images/" + self.name + ".jpg"
 
     def get_avg_rating(self):
         avg_rating = Review.objects.filter(

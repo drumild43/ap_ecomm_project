@@ -41,20 +41,25 @@
       {% for product in products %}  
       <div class="prods">
         <div class="prods-hd">
-          <img src="./images/ASIAN Future-01.jpg" alt="">
+          {% if curr_user %}
+          <a href="{% url 'store:product-details' curr_user.id product.id %}">
+          {% else %}
+          <a href="{% url 'store:anon_product-details' product.id %}">
+          {% endif %}
+            <img src="{% static product.get_img_name %}" alt="">
+          </a>
         </div>
           
         <div class="prods-footer">
-          <!--Check if this is the right way to send id to views-->
-          <a href="{% url 'store:product-details' product.id %}">
+          {% if curr_user %}
+          <a href="{% url 'store:product-details' curr_user.id product.id %}">
+          {% else %}
+          <a href="{% url 'store:anon_product-details' product.id %}">
+          {% endif %}
             <h3>{{ product.name }}</h3>
           </a>
           <div class="rating">
-            <i class="bx bxs-star fa-xs"></i>
-            <i class="bx bxs-star fa-xs"></i>
-            <i class="bx bxs-star fa-xs"></i>
-            <i class="bx bx-star fa-xs"></i>
-            <i class="bx bx-star fa-xs"></i>
+            <h4>Rating: {{ product.get_avg_rating }}</h4>
           </div>
           <h3 class="price">{{ product.price }}</h3>
         </div>

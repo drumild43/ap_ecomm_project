@@ -17,11 +17,14 @@
       {% for cartitem in cart.cartitem_set.all %}
       <div class="Cartitems">
         <div class="imgb">
-          <img src="./images/tp4.png"/>
+          <a href="{% url 'store:product-details' curr_user.id cartitem.product.id %}">
+            <img src="{% static cartitem.product.get_img_name %}"/>
+          </a>
         </div>
         <div class="itom">
-          <!--try reducing code by defining str for product, category-->
-          <h1 class="Name">{{ cartitem.product.name }}</h1>
+          <a href="{% url 'store:product-details' curr_user.id cartitem.product.id %}">
+            <h1 class="Name">{{ cartitem.product.name }}</h1>
+          </a>
           <h3 class="Description">{{ cartitem.product.category.name }}&nbsp;&nbsp; Size: {{ cartitem.size }}</h3>
         </div>
           
