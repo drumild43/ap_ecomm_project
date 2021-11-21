@@ -225,10 +225,10 @@ def products(request, user_id=None):
         sort_criterion = request.GET.get('sort')
         
         if sort_criterion == "sort_price_LtoH":
-            products = sorted(products, key=getattr('price'))
+            products = sorted(products, key=attrgetter('price'))
 
         if sort_criterion == "sort_price_HtoL":
-            products = sorted(products, key=getattr('price'), reverse=True)
+            products = sorted(products, key=attrgetter('price'), reverse=True)
 
         context = {'products': products, 'error_message': error_message}
         if user_id:
