@@ -22,16 +22,19 @@
           <div class="menu">
             <ul class="navigation-list">
               <li>
-                <div class="searchbar">
-                  <form action = "{% url 'store:products' %}" method = 'get'>
+                {% if curr_user %}
+                <form action="{% url 'store:products' curr_user.id %}" method="get">
+                {% else %}
+                <form action="{% url 'store:anon_products' %}" method="get">
+                {% endif %}
+                  <div class="searchbar">
                     <input id ="inputbar"  class="search_input" type="text" name="inputbar" placeholder="Search..." autocomplete="chrome-off">
-                    <!--not sure-->
-                    <a href="#" class="search_bar"><i type="submit" class="fas fa-search "></i></a>
+                    <i type="submit" class="fas fa-search "></i>
                     <div class="results">
                       <ul></ul>
                     </div>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </li>
               {% if curr_user %}
               <li class="navigation-item">

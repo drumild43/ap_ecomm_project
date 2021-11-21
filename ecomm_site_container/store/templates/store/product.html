@@ -5,24 +5,31 @@
 
   <section class="section all-products" id="products">
     <div class="top-container">
-      {% if all_prods %}
-      <h1><b>All Products</b></h1>
+      {% if curr_user %}
+      <form action="{% url 'store:products' curr_user.id %}" method="get">
+      {% else %}
+      <form action="{% url 'store:anon_products' %}" method="get">
       {% endif %}
-      <form action = "{% url 'store:products' %}" method = "get">
-        <input type="checkbox" id="sort_H_to_L" name="sort_H_to_L" value="Sort_H_to_L">
-        <label for="sort_H_to_L"> Sort by Price (High to Low)</label>
-        <input type="checkbox" id="sort_L_to_H" name="sort_L_to_H" value="Sort_L_to_H">
-        <label for="sort_L_to_H"> Sort by Price (Low to High)</label>
-        <input type="checkbox" id="cat_sports" name="cat_sports" value="Cat_sports">
-        <label for="cat_sports"> Filter By Category (Sports)</label>
-        <input type="checkbox" id="cat_formal" name="cat_formal" value="Cat_formal">
-        <label for="cat_formal"> Filter By Category (Formal)</label>
-        <input type="checkbox" id="cat_flipflops" name="cat_flipflops" value="Cat_flipflops">
-        <label for="cat_flipflops"> Filter By Category (Flipflops)</label>
-        <input type="checkbox" id="cat_casual" name="cat_casual" value="Cat_casual">
-        <label for="cat_casual"> Filter By Category (Casual)</label><br>	
+    
+        <select name="sort">
+          <option value="" selected disabled>Sort</option>
+          <option value="sort_price_LtoH">Price (Low to High)</option>
+          <option value="sort_price_HtoL">Price (High to Low)</option>
+        </select>
         
-        <button><input class= "but-fil" type="submit" value="Submit"></button>
+        <input type="checkbox" id="cat_sports" name="sports-filter">
+        <label for="cat_sports"> Sports Shoes</label>
+
+        <input type="checkbox" id="cat_formal" name="formal-filter">
+        <label for="cat_formal"> Formal Shoes</label>
+        
+        <input type="checkbox" id="cat_flipflops" name="flipflops-filter">
+        <label for="cat_flipflops"> Flip Flops</label>
+        
+        <input type="checkbox" id="cat_casual" name="casual-filter">
+        <label for="cat_casual"> Casual Shoes</label>
+
+        <button type="submit">Apply</button>
       </form>          
     </div>
     

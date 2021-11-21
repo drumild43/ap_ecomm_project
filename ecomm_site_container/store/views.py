@@ -1,4 +1,5 @@
-from django.db.models import Avg, Count
+from operator import attrgetter
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -163,108 +164,78 @@ def address(request, user_id):
 
         return HttpResponseRedirect(reverse('store:account', args=(user_id,)))
 
-def products(request):
-    products = Product.objects.all()
-    srch_prods = []
-    filter_prods = []
-
+def products(request, user_id=None):
     if request.method == 'GET':
-        srch = request.GET.get('inputbar')
-        cat_sports = request.GET.get('cat_sports')
-        cat_formal = request.GET.get('cat_formal')
-        cat_flipflops = request.GET.get('cat_flipflops')
-        cat_casual = request.GET.get('cat_casual')
-        sort_HtoL = request.GET.get('sort_H_to_L')
-        sort_LtoH = request.GET.get('sort_L_to_H')
-        if srch:
-            for product in products:
-                if srch in product.name.lower() or srch in product.description.lower() or srch in product.category.lower():
-                    srch_prods += product
+        error_message = None
+        products = Product.objects.all()
 
-            products = []
-            products += srch_prods    
+        # filter
+        sports_filter = request.GET.get('sports-filter')
+        formal_filter = request.GET.get('formal-filter')
+        flipflops_filter = request.GET.get('flipflops-filter')
+        casual_filter = request.GET.get('casual-filter')
 
-            if products == []:
-                errormessage = 'No match for your search'
-                context = {'products': products, 'errormessage': errormessage}
-            else:
-                context = {'products': products}
-            return render(request, 'store/product.html', context)
+        filtered_prods = []
+        cat_list = []
 
-        if sort_HtoL:
-            if cat_sports:
-                filter_prods += Product.objects.filter(category__name = cat_sports)
-            
-            if cat_formal:
-                filter_prods += Product.objects.filter(category__name = cat_formal)
+        if sports_filter:
+            sports_prods = Product.objects.filter(category__name="Sports")
+            cat_list.append(sports_prods)
 
-            if cat_flipflops:
-                filter_prods += Product.objects.filter(category__name = cat_flipflops)
+        if formal_filter:
+            formal_prods = Product.objects.filter(category__name="Formal")
+            cat_list.append(formal_prods)
 
-            if cat_casual:
-                filter_prods += Product.objects.filter(category__name = cat_casual)
-                
-            if filter_prods == []:
-                filter_prods += Product.objects.order_by('-price')
-                products = []
-                products += filter_prods
-                context = {'products': products}
-                return render(request, 'store/product.html', context)
-            
-            products = []
-            products += filter_prods
-            context = {'products': products}
+        if flipflops_filter:
+            flipflops_prods = Product.objects.filter(category__name="Flip flops")
+            cat_list.append(flipflops_prods)
 
-            return render(request, 'store/product.html', context)
+        if casual_filter:
+            casual_prods = Product.objects.filter(category__name="Casual")
+            cat_list.append(casual_prods)
 
-        if sort_LtoH:
-            if cat_sports:
-                filter_prods += Product.objects.filter(category__name = cat_sports)
-            
-            if cat_formal:
-                filter_prods += Product.objects.filter(category__name = cat_formal)
+        for category_products in cat_list:
+            for product in category_products:
+                filtered_prods.append(product)
 
-            if cat_flipflops:
-                filter_prods += Product.objects.filter(category__name = cat_flipflops)
+        # if filtered list is not empty, set products to filtered product list
+        # if filtered list is empty, cat_list is empty i.e. no filter applied
+        if filtered_prods:
+            products = filtered_prods
 
-            if cat_casual:
-                filter_prods += Product.objects.filter(category__name = cat_casual)
-            
-            if filter_prods == []:
-                filter_prods += Product.objects.order_by('price')
-                products = []
-                products += filter_prods
-                context = {'products': products}
-                return render(request, 'store/product.html', context)
+        # 'products' is a list now, not a Queryset
+        
+        # search
+        search_term = request.GET.get('inputbar')
+        
+        if search_term:
+            no_match_message = "No matches found for" + search_term
+            search_term = search_term.lower()
+            # remove products that don't match search term
+            products_copy = products.copy()
+            for product in products_copy:
+                if search_term not in product.name.lower() and \
+                    search_term not in product.category.name.lower():
+                    products.remove(product)
 
-            #not sure how to sort after filtering
+            if not products:
+                error_message = no_match_message 
+        
+        # sort
+        sort_criterion = request.GET.get('sort')
+        
+        if sort_criterion == "sort_price_LtoH":
+            products = sorted(products, key=getattr('price'))
 
-            products = []
-            products += filter_prods
-            context = {'products': products}
+        if sort_criterion == "sort_price_HtoL":
+            products = sorted(products, key=getattr('price'), reverse=True)
 
-            return render(request, 'store/product.html', context)
+        context = {'products': products, 'error_message': error_message}
+        if user_id:
+            curr_user = EcomUser.objects.get(pk=user_id)
+            context['curr_user'] = curr_user
 
-        if cat_sports:
-            filter_prods += Product.objects.filter(category__name = cat_sports)
-            
-        if cat_formal:
-            filter_prods += Product.objects.filter(category__name = cat_formal)
-
-        if cat_flipflops:
-            filter_prods += Product.objects.filter(category__name = cat_flipflops)
-
-        if cat_casual:
-            filter_prods += Product.objects.filter(category__name = cat_casual)
-
-        products = []
-        products += filter_prods
-        context = {'products': products}
-        return render(request, 'store/product.html', context)
-
-    all_prods = 'All products'            
-    context = {'products': products, 'all_prods': all_prods}
-    return render(request, 'store/product.html', context)
+        return render(request, 'store/product.html', context=context)
 
 def product_details(request, product_id, user_id=None):
     if request.method == 'GET':
