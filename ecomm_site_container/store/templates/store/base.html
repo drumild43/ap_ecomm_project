@@ -34,7 +34,9 @@
                 <form action="{% url 'store:anon_products' %}" method="get">
                 {% endif %}
                   <div class="searchbar">
-                    <input id ="inputbar"  class="search_input" type="text" name="inputbar" placeholder="Search..." autocomplete="chrome-off">
+                    <input id ="inputbar"  class="search_input" type="text" 
+                    name="inputbar" placeholder="Search..." autocomplete="chrome-off"
+                    {% if search_term %}value="{{ search_term }}"{% endif %}>
                     <i type="submit" class="fas fa-search "></i>
                     <div class="results">
                       <ul></ul>
@@ -152,5 +154,8 @@
           </div>
         </div>
       </section>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+      <script src="{% static 'store/js/index.js' %}"></script> 
     </body>
   </html>

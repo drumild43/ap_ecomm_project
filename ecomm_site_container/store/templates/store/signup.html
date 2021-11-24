@@ -26,7 +26,11 @@
   <body>
     <section class="signup">
       <div class="logo">
+        {% if curr_user %}
         <a href="{% url 'store:homepage' curr_user.id %}">
+        {% else %}
+        <a href="{% url 'store:anon_homepage' %}">
+        {% endif %}
           <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
           The Shoes Maker
         </a>
@@ -41,7 +45,7 @@
         {% endif %}
         
           {% csrf_token %}
-          <div class="tit">
+          <div class="tit" style="margin-top: 1rem;">
             <h1>Sign up</h1>
           </div>
 

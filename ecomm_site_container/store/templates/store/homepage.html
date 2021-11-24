@@ -141,10 +141,16 @@
               {% endif %}
                 <h2>Sports Shoes</h2>
                 <h4 class="quote">Live the Game!!!</h4>
-
-                <img src="{% static 'store/images/tp1.png' %}" alt="">
               </a>
             </div>
+
+            {% if curr_user %}
+            <a href="{% url 'store:products' curr_user.id %}" class="href">
+            {% else %}
+            <a href="{% url 'store:anon_products' %}" class="href">
+            {% endif %}
+              <img src="{% static 'store/images/tp1.png' %}" alt="">
+            </a>
           </div>
 
           <div class="prdt-box">
@@ -156,10 +162,16 @@
               {% endif %}
                 <h2>Casual Shoes</h2>
                 <h4 class="quote">Wear the Trend!!!</h4>
-
-                <img src="{% static 'store/images/tp2.png' %}" alt="">
               </a>
             </div>
+
+            {% if curr_user %}
+            <a href="{% url 'store:products' curr_user.id %}" class="href">
+            {% else %}
+            <a href="{% url 'store:anon_products' %}" class="href">
+            {% endif %}
+              <img src="{% static 'store/images/tp2.png' %}" alt="">
+            </a>
           </div>
 
           <div class="prdt-box">
@@ -171,10 +183,16 @@
               {% endif %}
                 <h2>Flip Flops</h2>
                 <h4 class="quote">Take a Ride!!!</h4>
-
-                <img src="{% static 'store/images/tp3.png' %}" alt="">
               </a>
             </div>
+
+            {% if curr_user %}
+            <a href="{% url 'store:products' curr_user.id %}" class="href">
+            {% else %}
+            <a href="{% url 'store:anon_products' %}" class="href">
+            {% endif %}
+              <img src="{% static 'store/images/tp3.png' %}" alt="">
+            </a>
           </div>
 
           <div class="prdt-box">
@@ -185,11 +203,17 @@
               <a href="{% url 'store:anon_products' %}" class="href">
               {% endif %}
                 <h2>Formal Shoes</h2>
-                <h4 class="quote">The Gentlemen's Choice!!!</h4>
-
-                <img src="{% static 'store/images/tp4.png' %}" alt="">
+                <h4 class="quote">The Gentleman's Choice!!!</h4>
               </a>
             </div>
+
+            {% if curr_user %}
+            <a href="{% url 'store:products' curr_user.id %}" class="href">
+            {% else %}
+            <a href="{% url 'store:anon_products' %}" class="href">
+            {% endif %}
+              <img src="{% static 'store/images/tp4.png' %}" alt="">
+            </a>
           </div>
         </div>
       </div> 

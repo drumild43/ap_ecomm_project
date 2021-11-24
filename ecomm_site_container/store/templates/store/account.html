@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<center>
+<center style="margin-top: 7rem;">
   <table>
     <tr>
       <td style="width: fit-content;">
@@ -67,30 +67,32 @@
   </div>      
 </div>
 
-<div class="your-order">
-  <h1>Your Orders</h1>
+<div class="your-order" style="margin: 2rem; background-color: white;">
+  <h1 style="background-color: #deb9f7;">Your Orders</h1>
   {% for order in curr_user.order_set.all %}
-  <div class="order-header">
-    <table>
+  <div class="order-header" style="border-top: 0.1rem solid;">
+    <table style="margin-top: 2rem;">
       <tbody>
         <tr>
           <td><h2>Order #{{ order.id }}</h2></td>
-          <td><h2 style="text-align: right;">Status: {{ order.get_status_display }}</h2></td>
+          <td><h2 style="text-align: right;">Status: {{ order.get_updated_status }}</h2></td>
         </tr>
   
         <tr>
-          <td><h3 style="text-align: center;">{{ order.total_quantity }} items</h3></td>
-          <td><h3 style="text-align: center;">Placed on: {{ order.ordered_on }}</h3></td>
-          <td><h3 style="text-align: center;">Order Amount: {{ order.order_total }}</h3></td>
+          <td><h3 style="text-align: center; margin: 0rem 1rem;">{{ order.total_quantity }} items</h3></td>
+          <td><h3 style="text-align: center; margin: 0rem 1rem;">Placed on: {{ order.ordered_on }}</h3></td>
+          <td><h3 style="text-align: center; margin: 0rem 2rem;">Order Amount: {{ order.order_total }}</h3></td>
+          
+          {% if order.get_updated_status == "Confirmed" or order.get_updated_status == "In Transit" %}
+          <td>
+            <form action="{% url 'store:cancel-order' curr_user.id order.id %}" method="post"
+            style="margin: 0rem 1rem;">
+              {% csrf_token %}
+              <button type="submit" style="margin-top: 0rem;">Cancel order</button>
+            </form>
+          </td>
+          {% endif %}
         </tr>
-
-        {% if order.status == 'C' or order.status == 'T' %}
-        <tr>
-          <form action="{% url 'store:cancel-order' curr_user.id order.id %}" method="post">
-            <button type="submit">Cancel order</button>
-          </form>
-        </tr>
-        {% endif %}
   
       </tbody>
     </table>
@@ -108,7 +110,7 @@
         <a href="{% url 'store:product-details' curr_user.id orderitem.product.id %}">
           <h1 class="Name">{{ orderitem.product.name }}</h1>
         </a>
-        <h3 class="Description">{{ orderitem.product.category.name }}</h3>
+        <h3 class="Description">{{ orderitem.product.category.name }}&nbsp;&nbsp; Size: {{ orderitem.size }}</h3>
       </div>
       
       <div class="Amount">{{ orderitem.quantity }}</div>
@@ -121,44 +123,6 @@
   
   {% endfor %}
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <div class="Cart-Container">
-    <div class="Cartitems">
-      <div class="imgb">
-        <img src="{% static 'store/images/tp4.png' %}"/>
-      </div>
-      <div class="itom">
-        <h1 class="Name">Olivers' Special</h1>
-        <h3 class="Description">Formal </h3>
-      </div>
-      
-      <div class="Amount">2</div>
-      
-      <div class="prices">
-        <div class="status">On its way</div>
-      </div>
-    </div>
-  </div>
-
-
-
 </div>
 
 {% endblock content %}

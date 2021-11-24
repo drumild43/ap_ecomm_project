@@ -18,10 +18,10 @@
           <br/>
 
           {% if curr_user %}
-          <form action="{% url 'store:add-to-cart' curr_user.id product.id %}" method="post">
+          <form id="cart-form" action="{% url 'store:add-to-cart' curr_user.id product.id %}" method="post">
             {% csrf_token %}
           {% else %}
-          <form action="{% url 'store:product-signin-redirect' product.id %}" method="get">
+          <form id="cart-form" action="{% url 'store:product-signin-redirect' product.id %}" method="get">
           {% endif %}
 
             <select name="size" required>
@@ -42,11 +42,11 @@
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
-
-            <button type="submit" name="update-method" value="add" style="margin: 0; border: 0px; font-size: 1.1rem;">
-              Add to Cart
-            </button>
           </form>
+
+          <button type="submit" name="update-method" value="add" form="cart-form" style="margin: 0.5rem; border: 0px; font-size: 1.1rem;">
+            Add to Cart
+          </button>
 
           {% if curr_user %}
           <form action="{% url 'store:update-wishlist' curr_user.id product.id %}" method="post">
@@ -59,15 +59,16 @@
               <div class="icons"><a><span><i class="bx bx-heart"></i></span></a></div>
             </button>
           </form>
-          
-          <h4>Product Details</h4>
-          <h6>{{ product.description }}</h6>
+          <br>
+          <h3 style="margin-top: 1rem;">Product Details</h3>
+          <h5>{{ product.description }}</h5>
             
             <div class="reviews">
               <ul>
                 {% if curr_user %}
                 <li>
                   <form action="{% url 'store:review' curr_user.id product.id %}" method="post">
+                    {% csrf_token %}
                     <div class="review-container">
                       <select name="rating" required>
                         <option value="" selected disabled>Rating</option>
@@ -77,26 +78,31 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                       </select>
-
+                      <br>
                       <textarea placeholder="Write Your review" name="review-text" rows="4" cols="50" required></textarea>
                       <p>Note: If you submit multiple reviews for a product, only your latest review will be valid.</p>
                       <button type="submit">Submit</button>
                     </div>
                   </form>
                 </li>
+                <br>
                 {% endif %}
 
                 {% for review in product.review_set.all %}
-                <li>
-                  <div class="name">
-                    <h4>{{ review.user.first_name }} {{ review.user.last_name }}</h4>
+                <li style="margin-bottom: 1rem;">
+                  <div class="name" style="margin-left: 0rem;">
+                    <h4><strong>{{ review.user.first_name }} {{ review.user.last_name }}</strong></h4>
                   </div>
 
                   {% if review.is_by_verified_buyer %}
-                  <button type="button">Verified Buyer</button>
+                  <button type="button" class="verified-but"
+                  style="margin: 1rem; background: transparent; color: darkorchid; 
+                  border: 2px solid darkorchid; padding: 0.5rem 1rem;">
+                    Verified Buyer
+                  </button>
                   {% endif %}
 
-                  <div class="rating">
+                  <div class="rating" style="margin-left: 1rem;">
                   {% for i in "12345" %}
                     {% if forloop.counter > review.rating %}
                     <i class="bx bx-star fa-xs"></i>
@@ -106,7 +112,7 @@
                   {% endfor %}
                   </div>
 
-                  <p>{{ review.review_text }}</p>
+                  <p style="text-align: center;">{{ review.review_text }}</p>
                 </li>
                 {% endfor %}
 

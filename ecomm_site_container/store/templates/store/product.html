@@ -5,36 +5,49 @@
 
   <section class="section all-products" id="products">
     <div class="top-container">
+      {% if search_term and not error_message %}
+      <h2>Showing results for "{{ search_term }}"</h2>
+      {% endif %}
       {% if curr_user %}
       <form action="{% url 'store:products' curr_user.id %}" method="get">
       {% else %}
       <form action="{% url 'store:anon_products' %}" method="get">
       {% endif %}
     
-        <select name="sort">
-          <option value="" selected disabled>Sort</option>
-          <option value="sort_price_LtoH">Price (Low to High)</option>
-          <option value="sort_price_HtoL">Price (High to Low)</option>
+        <select name="sort" style="margin: 1rem;">
+          <option value="" {% if not sort_criterion %}selected{% endif %}>
+            Sort by: None
+          </option>
+          <option value="sort_price_LtoH" {% if sort_criterion == "sort_price_LtoH" %}selected{% endif %}>
+            Sort by Price (Low to High)
+          </option>
+          <option value="sort_price_HtoL" {% if sort_criterion == "sort_price_HtoL" %}selected{% endif %}>
+            Sort by Price (High to Low)
+          </option>
         </select>
         
-        <input type="checkbox" id="cat_sports" name="sports-filter">
-        <label for="cat_sports"> Sports Shoes</label>
+        <input type="checkbox" id="cat_sports" name="sports-filter" {% if sports_filter %}checked{% endif %}>
+        <label for="cat_sports" style="margin-right: 0.7rem;"> Sports Shoes</label>
 
-        <input type="checkbox" id="cat_formal" name="formal-filter">
-        <label for="cat_formal"> Formal Shoes</label>
+        <input type="checkbox" id="cat_formal" name="formal-filter" {% if formal_filter %}checked{% endif %}>
+        <label for="cat_formal" style="margin-right: 0.7rem;"> Formal Shoes</label>
         
-        <input type="checkbox" id="cat_flipflops" name="flipflops-filter">
-        <label for="cat_flipflops"> Flip Flops</label>
+        <input type="checkbox" id="cat_flipflops" name="flipflops-filter" {% if flipflops_filter %}checked{% endif %}>
+        <label for="cat_flipflops" style="margin-right: 0.7rem;"> Flip Flops</label>
         
-        <input type="checkbox" id="cat_casual" name="casual-filter">
-        <label for="cat_casual"> Casual Shoes</label>
+        <input type="checkbox" id="cat_casual" name="casual-filter" {% if casual_filter %}checked{% endif %}>
+        <label for="cat_casual" style="margin-right: 0.7rem;"> Casual Shoes</label>
 
-        <button type="submit">Apply</button>
+        {% if search_term %}
+        <input type="hidden" name="inputbar" value="{{ search_term }}">
+        {% endif %}
+
+        <button type="submit" style="margin: 1rem;">Apply</button>
       </form>          
     </div>
-    
-    {% if errormessage %}
-    <h1><b>{{ errormessage }}</b></h1>
+    <br>
+    {% if error_message %}
+    <h1><b>{{ error_message }}</b></h1>
     {% endif %}
     
     <div class="prods-center container">

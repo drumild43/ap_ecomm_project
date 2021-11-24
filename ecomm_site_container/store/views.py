@@ -167,7 +167,7 @@ def address(request, user_id):
 def products(request, user_id=None):
     if request.method == 'GET':
         error_message = None
-        products = Product.objects.all()
+        products = list(Product.objects.all())
 
         # filter
         sports_filter = request.GET.get('sports-filter')
@@ -202,24 +202,19 @@ def products(request, user_id=None):
         # if filtered list is empty, cat_list is empty i.e. no filter applied
         if filtered_prods:
             products = filtered_prods
-
-        # 'products' is a list now, not a Queryset
         
         # search
         search_term = request.GET.get('inputbar')
         
         if search_term:
-            no_match_message = "No matches found for" + search_term
-            search_term = search_term.lower()
             # remove products that don't match search term
             products_copy = products.copy()
             for product in products_copy:
-                if search_term not in product.name.lower() and \
-                    search_term not in product.category.name.lower():
+                if search_term.lower() not in product.name.lower():
                     products.remove(product)
 
             if not products:
-                error_message = no_match_message 
+                error_message = 'No matches found for "' + search_term + '"' 
         
         # sort
         sort_criterion = request.GET.get('sort')
@@ -230,7 +225,16 @@ def products(request, user_id=None):
         if sort_criterion == "sort_price_HtoL":
             products = sorted(products, key=attrgetter('price'), reverse=True)
 
-        context = {'products': products, 'error_message': error_message}
+        context = {
+            'products': products, 
+            'error_message': error_message,
+            'search_term': search_term,
+            'sort_criterion': sort_criterion,
+            'sports_filter': sports_filter,
+            'formal_filter': formal_filter,
+            'flipflops_filter': flipflops_filter,
+            'casual_filter': casual_filter
+        }
         if user_id:
             curr_user = EcomUser.objects.get(pk=user_id)
             context['curr_user'] = curr_user
@@ -319,7 +323,7 @@ def cart(request, user_id, product_id=None, cartitem_id=None):
             cartitem.save()
 
         # if remove-all from cart page
-        if update_method == "remove-all":
+        elif update_method == "remove-all":
             CartItem.objects.filter(cart__pk=cart.id).delete()
             cart.total_quantity = 0
             cart.save()
@@ -353,8 +357,8 @@ def cart(request, user_id, product_id=None, cartitem_id=None):
                 # create item only if not in wishlist already
                 if not wlitem_list:
                     wlitem = WishlistItem(
-                        wishlist=wishlist, 
-                        product=Product.objects.get(pk=product_id)
+                        wishlist=curr_user.wishlist, 
+                        product=Product.objects.get(pk=cartitem.product.id)
                     )
                     wlitem.save()
 
@@ -437,6 +441,7 @@ def checkout(request, user_id):
             cartitem.delete()
 
         cart.total_quantity = 0
+        cart.save()
         return HttpResponseRedirect(reverse('store:pay-suc', args=(user_id,)))
 
 def pay_suc(request, user_id):
@@ -447,5 +452,6 @@ def cancel_order(request, user_id, order_id):
     if request.method == 'POST':
         order = Order.objects.get(pk=order_id)
         order.status = 'X'
+        order.save()
         
         return HttpResponseRedirect(reverse('store:account', args=(user_id,)))

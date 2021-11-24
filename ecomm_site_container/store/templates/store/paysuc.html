@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-        <link rel="stylesheet" href="{% static 'store/css/styles.css %}" />
+        <link rel="stylesheet" href="{% static 'store/css/styles.css' %}" />
         <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         
@@ -19,11 +20,12 @@
                 </a>
             </div>
                 
-            <div class="pger">
-                <form>
+            <div class="pger" style="padding: 2rem;">
+                <form style="padding: 1rem;">
                     <div class="tit">
-                        <h1>Payment Successful!</h1>
-                        <h2>Your order has been confirmed and will be delivered soon</h2>
+                        <h1 style="color: black;">Payment Successful!</h1>
+                        <br>
+                        <h3 style="color: black;">Your order has been confirmed and will be delivered soon</h3>
                     </div>
                     
                     <button type="submit">

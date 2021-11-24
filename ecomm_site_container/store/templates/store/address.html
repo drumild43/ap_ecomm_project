@@ -24,10 +24,11 @@
         <form action="{% url 'store:address' curr_user.id%}" method="post">
           {% csrf_token %}
           <div class="tit">
-            <h1>Update Address</h1>
+            <h1 style="margin-top: 1rem;">Update Address</h1>
           </div>
           <div class="updatecontainer">
-            <textarea placeholder="Enter new address. Leave empty to return to profile." name="address" rows="8" cols="42"></textarea>  
+            <textarea placeholder="Enter new address. Leave empty to return to profile." name="address" rows="6" cols="35"
+            style="padding: 0.5rem; font-size: 1rem; font-family: 'Vollkorn', serif;"></textarea>  
             
             <button type="submit">Update</button>
           </div>

@@ -121,7 +121,7 @@ class Order(models.Model):
 
     def get_updated_status(self):
         # if order not cancelled or delivered, update status according to order time
-        if self.status != 'X' or self.status != 'D':
+        if self.status != 'X' and self.status != 'D':
             time_passed = timezone.now() - self.ordered_on
             
             if time_passed < datetime.timedelta(minutes=30):
@@ -133,7 +133,9 @@ class Order(models.Model):
             else:
                 self.status = 'D'
 
-        return self.status
+            self.save()
+
+        return self.get_status_display()
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
@@ -156,5 +158,5 @@ class Review(models.Model):
 
         for order in orders:
             # buyer verified if there is a delivered order with given product
-            if order.get_updated_status() == 'D':
+            if order.get_updated_status() == 'Delivered':
                 return True

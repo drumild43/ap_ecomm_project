@@ -8,7 +8,8 @@
         <h3 class="Heading" style="font-size: 1.2em;">Your Cart</h3>
         <form action="{% url 'store:cart' curr_user.id %}" method="post" style="padding: 0;">
           {% csrf_token %}
-          <button type="submit" name="update-method" value="remove-all" style="margin-top: 0; padding: 1rem 2.5rem; font-size: 1rem;">
+          <button type="submit" name="update-method" value="remove-all" 
+          style="margin-top: 0; padding: 1rem 2.5rem; font-size: 1rem; background-color: rgb(248, 65, 33);">
             Remove All
           </button>
         </form>
@@ -28,31 +29,37 @@
           <h3 class="Description">{{ cartitem.product.category.name }}&nbsp;&nbsp; Size: {{ cartitem.size }}</h3>
         </div>
           
-        <div class="Amount">
-          <form id="ci-form" action="{% url 'store:update-cartitem' curr_user.id cartitem.id %}" method="post">
+        <div class="Amount" style="width: fit-content;">
+          <form id="ci-form" action="{% url 'store:update-cartitem' curr_user.id cartitem.id %}" method="post"
+          style="width: fit-content; background-color: white;">
             {% csrf_token %}
-            <button type="submit" name="update-method" value="decrease">-</button>
-          </form>
-          
-          <input type="text" value="1" readonly>
-            
-          <form action="{% url 'store:update-cartitem' curr_user.id cartitem.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit" name="update-method" value="increase">+</button>
+            <button type="submit" name="update-method" value="decrease" 
+            style="margin: 0; width: fit-content; padding: 0.5rem; display: inline;">
+              -
+            </button>
+            <input type="text" value="{{ cartitem.quantity }}" style="width: 1rem; display: inline;" readonly>
+            <button type="submit" name="update-method" value="increase" 
+            style="margin: 0; width: fit-content; padding: 0.5rem; display: inline;">
+              +
+            </button>
           </form>
         </div>
         
         <div class="prices">
-          <div class="price">{{ cartitem.product.price }}</div>
+          <div class="price" style="margin-top: 0.5rem;">{{ cartitem.product.price }} (per unit)</div>
           
-          <form action="{% url 'store:update-cartitem' curr_user.id cartitem.id %}" method="post">
-            <button type="submit" name="update-method" value="move-to-wl">Move to Wishlist</button>
+          <form action="{% url 'store:update-cartitem' curr_user.id cartitem.id %}" method="post"
+          style="margin: 0.5rem;">
+            {% csrf_token %}
+            <button type="submit" name="update-method" value="move-to-wl" style="margin: 0; padding: 1rem;">
+              Move to Wishlist
+            </button>
           </form>
-        </div>
-
-          <div class="remove">
-            <button form="ci-form" type="submit" name="update-method" value="remove">Remove</button>
-          </div>
+          <br>
+          <button form="ci-form" type="submit" name="update-method" value="remove"
+          style="margin: 0.7rem; padding: 1rem; background-color: rgb(248, 65, 33);">
+            Remove
+          </button>
         </div>
       </div>
 

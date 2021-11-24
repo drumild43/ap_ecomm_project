@@ -14,9 +14,13 @@
     <body>
         <section class="signin">
             <div class="logo">
+                {% if curr_user %}
                 <a href="{% url 'store:homepage' curr_user.id %}">
-                    <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
-                    The Shoes Maker
+                {% else %}
+                <a href="{% url 'store:anon_homepage' %}">
+                {% endif %}
+                <img src="{% static 'store/images/icon1.png' %}" alt="" class="TSM">
+                The Shoes Maker
                 </a>
             </div>
 
@@ -28,9 +32,7 @@
                 {% endif %}
 
                 {% csrf_token %} 
-                    <div class="tit">
-                    <h1>
-                    Log in </h1></div>
+                    <div class="tit" style="margin-top: 1rem;"><h1>Log in</h1></div>
                     <div class="sign-container">   
                         <input type="text" placeholder="Enter Email ID" name="email" required>  
                         <input type="password" placeholder="Enter Password" name="password" required>  

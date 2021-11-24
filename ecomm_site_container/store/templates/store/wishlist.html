@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 
-    <div class="Cart-Container">
-      <div class="Header3">
+    <div class="Cart-Container" style="margin-top: 7rem; margin-bottom: 3rem;">
+      <div class="Header3" style="padding-top: 0.7rem; padding-bottom: 0.7rem; margin-bottom: 1rem; border-bottom: solid #f08383;">
         <h3 class="Heading">Your Wishlist</h3>
         <form action="{% url 'store:wishlist' curr_user.id %}" method="post" style="padding: 0;">
           {% csrf_token %}
@@ -14,7 +14,7 @@
       </div>
 
       {% for wlitem in wishlist.wishlistitem_set.all %}
-      <div class="Cartitems">
+      <div class="Cartitems" style="margin-top: 0.5rem;">
         <div class="imgb">
           <a href="{% url 'store:product-details' curr_user.id wlitem.product.id %}">
             <img src="{% static wlitem.product.get_img_name %}"/>
@@ -32,12 +32,16 @@
           <a href="{% url 'store:product-details' curr_user.id wlitem.product.id %}">
             <div class="Wisl">View Product</div>
           </a>
-          <form action="{% url 'store:update_wishlist' curr_user.id wlitem.product.id %}" method="post">
+          <form action="{% url 'store:update-wishlist' curr_user.id wlitem.product.id %}" method="post" style="margin-bottom: 1rem;">
             {% csrf_token %}
-            <button type="submit" name="update-method" value="remove">Remove</button>
+            <button type="submit" name="update-method" value="remove" style="margin: 0;">Remove</button>
           </form>
         </div>
       </div>
+
+      {% empty %}
+      <h2 style="padding-left: 3rem; margin-top: 0.7rem;">Your wishlist is empty.</h2>
+
       {% endfor %}
     </div>    
 {% endblock content %}
