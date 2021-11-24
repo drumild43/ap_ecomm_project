@@ -1,5 +1,8 @@
 # AP E-Commerce Project
 
+## About
+The website is an e-commerce website for shoes with products in the Sports, Formal, Casual and Flipflops category.
+
 ## Tech Stack
 - **Frontend**
     - HTML
