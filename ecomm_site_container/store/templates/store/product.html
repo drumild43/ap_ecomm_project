@@ -18,11 +18,23 @@
           <option value="" {% if not sort_criterion %}selected{% endif %}>
             Sort by: None
           </option>
+          <option value="sort_price_HtoL" {% if sort_criterion == "sort_price_HtoL" %}selected{% endif %}>
+            Sort by Price (High to Low)
+          </option>
           <option value="sort_price_LtoH" {% if sort_criterion == "sort_price_LtoH" %}selected{% endif %}>
             Sort by Price (Low to High)
           </option>
-          <option value="sort_price_HtoL" {% if sort_criterion == "sort_price_HtoL" %}selected{% endif %}>
-            Sort by Price (High to Low)
+          <option value="sort_rating_HtoL" {% if sort_criterion == "sort_rating_HtoL" %}selected{% endif %}>
+            Sort by Rating (High to Low)
+          </option>
+          <option value="sort_rating_LtoH" {% if sort_criterion == "sort_rating_LtoH" %}selected{% endif %}>
+            Sort by Rating (Low to High)
+          </option>
+          <option value="sort_name_AtoZ" {% if sort_criterion == "sort_name_AtoZ" %}selected{% endif %}>
+            Sort by Name (A to Z)
+          </option>
+          <option value="sort_name_ZtoA" {% if sort_criterion == "sort_name_ZtoA" %}selected{% endif %}>
+            Sort by Name (Z to A)
           </option>
         </select>
         

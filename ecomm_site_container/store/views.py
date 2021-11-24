@@ -218,13 +218,32 @@ def products(request, user_id=None):
         
         # sort
         sort_criterion = request.GET.get('sort')
-        
-        if sort_criterion == "sort_price_LtoH":
-            products = sorted(products, key=attrgetter('price'))
 
         if sort_criterion == "sort_price_HtoL":
             products = sorted(products, key=attrgetter('price'), reverse=True)
+            
+        if sort_criterion == "sort_price_LtoH":
+            products = sorted(products, key=attrgetter('price'))
 
+        if sort_criterion == "sort_rating_HtoL":
+            products = sorted(
+                products, 
+                key=lambda product: product.get_avg_rating() if product.get_avg_rating() else 0, 
+                reverse=True
+            )
+
+        if sort_criterion == "sort_rating_LtoH":
+            products = sorted(
+                products, 
+                key=lambda product: product.get_avg_rating() if product.get_avg_rating() else 0, 
+            )
+
+        if sort_criterion == "sort_name_AtoZ":
+            products = sorted(products, key=lambda product: product.name.lower())
+
+        if sort_criterion == "sort_name_ZtoA":
+            products = sorted(products, key=lambda product: product.name.lower(), reverse=True)
+        
         context = {
             'products': products, 
             'error_message': error_message,
