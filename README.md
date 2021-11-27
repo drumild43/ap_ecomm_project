@@ -18,6 +18,9 @@ The website is an e-commerce website for shoes with products in the Sports, Form
 - Drumil Deliwala
 - Abhimanyu Sharma
 
+## Contributions
+Can be found in CONTRIBUTIONS.md
+
 ## How to run project
 1. Clone project:
     ```sh
